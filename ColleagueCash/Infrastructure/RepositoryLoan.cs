@@ -11,8 +11,10 @@ namespace ColleagueCash.Infrastructure
             this.fileName = fileName;
         }
 
-        public void Add(string name, decimal amount)
+        public void AddnewRegistration(string name, decimal amount)
         {
+            //escrever na ultima linha do csv 
+            //name e amount
             throw new NotImplementedException();
         }
 
