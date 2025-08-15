@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ColleagueCash.Domain
 {
-    public interface Interface1
+    public interface IRepositoryLoan
     {
         public void Add(string name, double amount);
 

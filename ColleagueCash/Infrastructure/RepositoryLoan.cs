@@ -7,7 +7,7 @@ using ColleagueCash.Domain;
 
 namespace ColleagueCash.Infrastructure
 {
-    public class RepositoryLoan : Interface1
+    public class RepositoryLoan : IRepositoryLoan
 
     {
         public void Add(string name, double amount)
