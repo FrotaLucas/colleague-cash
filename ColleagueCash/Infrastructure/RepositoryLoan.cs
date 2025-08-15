@@ -33,9 +33,8 @@ namespace ColleagueCash.Infrastructure
                 })
                 .ToList();  
 
-            //Console.WriteLine("first line: " + loans[0]);
+            return loans;
 
-            throw new NotImplementedException();
         }
     }
 }
