@@ -1,4 +1,5 @@
-﻿using ColleagueCash.Domain;
+﻿using ColleagueCash.Application;
+using ColleagueCash.Domain;
 using ColleagueCash.Infrastructure;
 
 class Program
@@ -17,6 +18,8 @@ class Program
         string fileName = string.Empty;
 
         IRepositoryLoan repositoryLoan = new RepositoryLoan(fileName);
+
+        var listLoanHandler = new ListLoanHandler(repositoryLoan);
         
 
     }
