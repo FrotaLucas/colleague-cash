@@ -16,5 +16,14 @@ namespace ColleagueCash.Application
             _repositoryLoan = repositoryLoan;
         }
 
+
+        public void Execute()
+        {
+            var list = _repositoryLoan.ListLoans()
+                .OrderBy( loan => loan.Name)
+                .ToList();  
+
+            Console.WriteLine("nome com a:" + list[0]);
+        }
     }
 }
