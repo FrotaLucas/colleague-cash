@@ -17,7 +17,7 @@ namespace ColleagueCash.Application
         }
 
 
-        public void Execute(string name, double amount)
+        public void Execute(string name, decimal amount)
         {
 
         }

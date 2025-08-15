@@ -16,7 +16,7 @@ namespace ColleagueCash.Infrastructure
             this.fileName = fileName;
         }
 
-        public void Add(string name, double amount)
+        public void Add(string name, decimal amount)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace ColleagueCash.Infrastructure
                 .Select(line => new Loan
                 {
                     Name = line[0],
-                    Amount = Double.Parse(line[1])  
+                    Amount = Decimal.Parse(line[1])  
                 })
                 .ToList();  
 

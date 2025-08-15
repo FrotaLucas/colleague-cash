@@ -23,7 +23,7 @@ namespace ColleagueCash.Application
                 .OrderBy( loan => loan.Name)
                 .ToList();  
 
-            Console.WriteLine("nome com a:" + list[0]);
+            Console.WriteLine("nome com a:" + list[0].Name);
         }
     }
 }
