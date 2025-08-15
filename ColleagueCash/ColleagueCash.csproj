@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\" />
-    <Folder Include="Domain\" />
+    <Folder Include="Application\" />
   </ItemGroup>
 
 </Project>
