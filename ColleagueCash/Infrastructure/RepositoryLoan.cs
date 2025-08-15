@@ -13,9 +13,10 @@ namespace ColleagueCash.Infrastructure
 
         public void AddnewRegistration(string name, decimal amount)
         {
-            //escrever na ultima linha do csv 
-            //name e amount
-            throw new NotImplementedException();
+           string newRegistration = $"{name};{amount}";
+
+            File.AppendAllText(fileName, newRegistration + Environment.NewLine);
+
         }
 
         public List<Loan> ListLoans()
