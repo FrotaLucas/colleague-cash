@@ -20,6 +20,7 @@ namespace ColleagueCash.Application
         public void Execute(string name, decimal amount)
         {
 
+            _repositoryLoan.AddnewRegistration(name, amount);
         }
     }
 }
