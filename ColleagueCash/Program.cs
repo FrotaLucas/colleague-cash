@@ -1,9 +1,14 @@
 ﻿
 
+using ColleagueCash.Domain;
+using ColleagueCash.Infrastructure;
+
 class Program
 {
     public static void Main(String[] args)
     {
-        Console.WriteLine("Hellow");
+        IRepositoryLoan repositoryLoan = new RepositoryLoan();
+
+
     }
 }
