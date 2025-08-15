@@ -5,7 +5,9 @@ class Program
 {
     public static void Main(String[] args)
     {
-        IRepositoryLoan repositoryLoan = new RepositoryLoan();
+        string fileName = string.Empty;
+
+        IRepositoryLoan repositoryLoan = new RepositoryLoan(fileName);
         
 
     }

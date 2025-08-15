@@ -8,8 +8,14 @@ using ColleagueCash.Domain;
 namespace ColleagueCash.Infrastructure
 {
     public class RepositoryLoan : IRepositoryLoan
-
     {
+        private readonly string fileName;
+
+        public RepositoryLoan(string fileName)
+        {
+            this.fileName = fileName;
+        }
+
         public void Add(string name, double amount)
         {
             throw new NotImplementedException();
