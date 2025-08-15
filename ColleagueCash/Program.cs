@@ -18,6 +18,7 @@ class Program
         IRepositoryLoan repositoryLoan = new RepositoryLoan(fileName);
 
         var listLoanHandler = new ListLoanHandler(repositoryLoan);
+        var registerLoanHandler = new RegisterLoanHandler(repositoryLoan);
 
         listLoanHandler.Execute();
     }
