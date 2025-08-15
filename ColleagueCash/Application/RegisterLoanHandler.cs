@@ -15,5 +15,11 @@ namespace ColleagueCash.Application
         {
             _repositoryLoan = repositoryLoan;
         }
+
+
+        public void Execute(string name, double amount)
+        {
+
+        }
     }
 }
