@@ -8,6 +8,9 @@ namespace ColleagueCash.Domain
 {
     public interface Interface1
     {
+        public void Add(string name, double amount);
+
+        public List<Loan> ListLoans();
 
     }
 }
