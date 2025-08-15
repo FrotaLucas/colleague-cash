@@ -23,6 +23,18 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> ListLoans()
         {
+            var loans = File.ReadAllLines(fileName)
+                .Skip(1)
+                .Select(line => line.Split(";"))
+                .Select(line => new Loan
+                {
+                    Name = line[0],
+                    Amount = Double.Parse(line[1])  
+                })
+                .ToList();  
+
+            //Console.WriteLine("first line: " + loans[0]);
+
             throw new NotImplementedException();
         }
     }
