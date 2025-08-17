@@ -8,7 +8,7 @@ namespace ColleagueCash.Domain
 {
     public interface IRepositoryLoan
     {
-        public void AddnewRegistration(string name, decimal amount);
+        public void AddnewRegistration(Loan loan);
 
         public List<Loan> ListLoans();
 
