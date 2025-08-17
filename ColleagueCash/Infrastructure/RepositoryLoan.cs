@@ -13,7 +13,7 @@ namespace ColleagueCash.Infrastructure
 
         public void AddnewRegistration(Loan loan)
         {
-           string newRegistration = $"{loan.Description};{loan.Amount}";
+            string newRegistration = $"{loan.Description};{loan.Amount}";
 
             File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
@@ -27,19 +27,19 @@ namespace ColleagueCash.Infrastructure
                 .Select(line => new Loan
                 {
                     Description = line[0],
-                    Amount = Decimal.Parse(line[1])  
+                    Amount = Decimal.Parse(line[1])
                 })
-                .ToList();  
+                .ToList();
 
             return loans;
+
 
         }
 
         public void ReduceLoan(string name, decimal amount)
         {
-            
-        }
 
+        }
 
     }
 }
