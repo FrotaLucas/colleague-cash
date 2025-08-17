@@ -34,5 +34,12 @@ namespace ColleagueCash.Infrastructure
             return loans;
 
         }
+
+        public void ReduceLoan()
+        {
+
+        }
+
+
     }
 }
