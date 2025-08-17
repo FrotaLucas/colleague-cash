@@ -1,3 +1,7 @@
-﻿name;amount
-Leandro;200
-Adriano;100
+﻿id;description;amount;date;idBorrower
+Marcos;20
+Marcos;20
+Lucas;20
+Marcos;20
+Marcos;20
+Marcos;20
