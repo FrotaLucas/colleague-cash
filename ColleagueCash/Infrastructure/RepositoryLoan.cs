@@ -19,7 +19,7 @@ namespace ColleagueCash.Infrastructure
 
         }
 
-        public List<Loan> ListLoans()
+        public List<Loan> GetAllLoans()
         {
             var loans = File.ReadAllLines(fileName)
                 .Skip(1)

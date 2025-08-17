@@ -4,7 +4,7 @@
     {
         public void AddnewRegistration(Loan loan);
 
-        public List<Loan> ListLoans();
+        public List<Loan> GetAllLoans();
 
     }
 }
