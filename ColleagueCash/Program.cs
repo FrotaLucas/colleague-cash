@@ -6,16 +6,18 @@ class Program
 {
     public static void Main(String[] args)
     {
-        //COMO ESCONDER ESSA PARTE DA APLICACAO? COLOCAR TUDO DENTRO DE UM app.config ??
-        string baseDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string fileName = Path.Combine(baseDirectory, "WorkLoad\\loan-registration.csv");
+        //COMO ESCONDER loanFile & borrowerFile DA APLICACAO? COLOCAR TUDO DENTRO DE UM app.config ??
+
+
+        string loanPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+        string loanFile = Path.Combine(loanPath, "WorkLoad\\loan-registration.csv");
 
 
         string borrowerPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerFile = Path.Combine(baseDirectory, "WorkLoad\\borrower-registration.csv");
+        string borrowerFile = Path.Combine(borrowerPath, "WorkLoad\\borrower-registration.csv");
 
 
-        IRepositoryLoan repositoryLoan = new RepositoryLoan(fileName);
+        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
 
         var listLoanHandler = new ListLoanHandler(repositoryLoan);
         var registerLoanHandler = new RegisterLoanHandler(repositoryLoan);
