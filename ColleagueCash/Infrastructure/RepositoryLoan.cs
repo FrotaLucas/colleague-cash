@@ -11,9 +11,9 @@ namespace ColleagueCash.Infrastructure
             this.fileName = fileName;
         }
 
-        public void AddnewRegistration(string name, decimal amount)
+        public void AddnewRegistration(Loan loan)
         {
-           string newRegistration = $"{name};{amount}";
+           string newRegistration = $"{loan.Description};{loan.Amount}";
 
             File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
