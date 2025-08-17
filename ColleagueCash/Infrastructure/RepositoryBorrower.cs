@@ -31,7 +31,8 @@ namespace ColleagueCash.Infrastructure
 
         public void AddNewBorrower(Borrower borrower)
         {
-            string newRegistration = $"{borrower.Name};{borrower.FamilyName};";
+            int borrowerId  = GetNextId();  
+            string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};";
 
             File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
         }
