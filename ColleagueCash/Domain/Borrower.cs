@@ -8,7 +8,11 @@ namespace ColleagueCash.Domain
 {
     public class Borrower
     {
-        public string Name { get; set; } 
+        public int Id { get; set; } 
+
+        public string Name { get; set; }
+
+        public string FamilyName { get; set; }
 
         public decimal Amount { get; set; } 
     }
