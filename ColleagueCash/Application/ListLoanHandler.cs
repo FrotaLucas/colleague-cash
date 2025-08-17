@@ -20,10 +20,10 @@ namespace ColleagueCash.Application
         public void Execute()
         {
             var list = _repositoryLoan.ListLoans()
-                .OrderBy( loan => loan.Name)
+                .OrderBy( loan => loan.Description)
                 .ToList();  
 
-            Console.WriteLine("nome com a:" + list[0].Name);
+            Console.WriteLine("nome com a:" + list[0].Description);
         }
     }
 }

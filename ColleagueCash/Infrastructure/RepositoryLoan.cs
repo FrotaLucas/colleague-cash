@@ -26,7 +26,7 @@ namespace ColleagueCash.Infrastructure
                 .Select(line => line.Split(";"))
                 .Select(line => new Loan
                 {
-                    Name = line[0],
+                    Description = line[0],
                     Amount = Decimal.Parse(line[1])  
                 })
                 .ToList();  
