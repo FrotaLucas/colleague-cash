@@ -17,10 +17,10 @@ namespace ColleagueCash.Application
         }
 
 
-        public void Execute(string name, decimal amount)
+        public void Execute(Loan loan)
         {
 
-            _repositoryLoan.AddnewRegistration(name, amount);
+            _repositoryLoan.AddnewRegistration(loan);
         }
     }
 }
