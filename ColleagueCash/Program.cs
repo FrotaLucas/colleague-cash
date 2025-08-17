@@ -12,7 +12,7 @@ class Program
 
 
         string borrowerPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerFile = Path.Combine(baseDirectory, "WorkLoad\\loan-registration.csv");
+        string borrowerFile = Path.Combine(baseDirectory, "WorkLoad\\borrower-registration.csv");
 
 
         IRepositoryLoan repositoryLoan = new RepositoryLoan(fileName);
