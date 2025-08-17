@@ -4,11 +4,11 @@
     {
         public int LoanId { get; set; }
 
-        public string Name { get; set; }
+        public string Description { get; set; }
 
         public decimal Amount { get; set; }
         
-        public DateTime LoanDate { get; set; }
+        public DateTime LoanDate { get; set; } = DateTime.Now;  
 
     }
 }
