@@ -4,9 +4,17 @@ namespace ColleagueCash.Infrastructure
 {
     public class RepositoryBorrower : IBorrowerRepository
     {
+        private readonly string fileName;
+
+        public RepositoryBorrower(string fileName)
+        {
+            this.fileName = fileName;
+        }
+
+
         public void AddNewBorrower(Borrower borrower)
         {
-            throw new NotImplementedException();
+            
         }
 
         public List<Borrower> GetAllBorrowers()
