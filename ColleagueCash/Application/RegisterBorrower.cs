@@ -11,14 +11,17 @@ namespace ColleagueCash.Application
     public class RegisterBorrower
     {
 
-        public readonly IRepositoryBorrower RepositoryBorrower;
+        public readonly IRepositoryBorrower _repositoryBorrower;
 
         public RegisterBorrower(IRepositoryBorrower repositoryBorrower)
         {
-            RepositoryBorrower = repositoryBorrower;
+            _repositoryBorrower = repositoryBorrower;
         }
 
 
-
+        public void Execute(Borrower borrower)
+        {
+            _repositoryBorrower.AddNewBorrower(borrower);
+        }
     }
 }
