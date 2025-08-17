@@ -7,9 +7,26 @@ namespace ColleagueCash.Infrastructure
 
         private readonly string borrowerFile;
 
-        public RepositoryBorrower(string fileName)
+        private readonly string lastBorrowerId;
+
+        public RepositoryBorrower(string fileName, string lastBorrowerId)
         {
             this.borrowerFile = fileName;
+            this.lastBorrowerId = lastBorrowerId;
+        }
+
+
+        public int GetNextId()
+        {
+            int id = 0;
+
+            if (File.Exists(lastBorrowerId)) {
+                id = int.Parse(File.ReadAllText(lastBorrowerId));
+            }
+
+            int newId = id + 1;
+            File.WriteAllText(lastBorrowerId, newId.ToString());
+            return newId;
         }
 
         public void AddNewBorrower(Borrower borrower)
