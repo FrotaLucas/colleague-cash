@@ -1,6 +1,6 @@
 ﻿namespace ColleagueCash.Domain
 {
-    public interface IBorrowerRepository
+    public interface IRepositoryBorrower
     {
         public void AddNewBorrower(Borrower borrower);
 

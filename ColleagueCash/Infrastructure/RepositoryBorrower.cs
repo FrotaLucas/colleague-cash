@@ -2,7 +2,7 @@
 
 namespace ColleagueCash.Infrastructure
 {
-    public class RepositoryBorrower : IBorrowerRepository
+    public class RepositoryBorrower : IRepositoryBorrower
     {
 
         private readonly string fileName;
