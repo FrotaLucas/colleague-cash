@@ -14,9 +14,7 @@ namespace ColleagueCash.Domain
 
         public string FamilyName { get; set; }
 
-        public decimal Amount { get; set; }
-
-        public DateTime LoanDate { get; set; }
+        public int Cellphone { get; set; }
     }
 
 }
