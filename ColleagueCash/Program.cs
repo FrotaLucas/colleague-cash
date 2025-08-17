@@ -18,7 +18,7 @@ class Program
 
         //last id borrower
         string borrowerIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerId = Path.Combine(borrowerIdPath, "WorkLoad\\borrower-registration.csv");
+        string borrowerSize = Path.Combine(borrowerIdPath, "WorkLoad\\last-id.txt");
 
 
         IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
@@ -35,5 +35,21 @@ class Program
         };
 
         registerLoanHandler.Execute(loan);
+
+
+
+        Borrower borrower = new Borrower
+        {
+            Name = "Lucas",
+            FamilyName = "Dias",
+            Cellphone = 21983773
+
+        };
+
+        IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, borrowerSize);
+
+        RegisterBorrower registerBorrower = new RegisterBorrower(repositoryBorrower);
+
+        repositoryBorrower.AddNewBorrower(borrower);
     }
 }
