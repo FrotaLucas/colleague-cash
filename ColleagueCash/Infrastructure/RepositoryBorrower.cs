@@ -15,7 +15,6 @@ namespace ColleagueCash.Infrastructure
             this.lastBorrowerId = lastBorrowerId;
         }
 
-
         public int GetNextId()
         {
             int id = 0;
@@ -32,14 +31,25 @@ namespace ColleagueCash.Infrastructure
         public void AddNewBorrower(Borrower borrower)
         {
             int borrowerId  = GetNextId();  
-            string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};";
+            string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};{borrower.Cellphone}";
 
             File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
         }
 
         public List<Borrower> GetAllBorrowers()
         {
-            throw new NotImplementedException();
+            var borrowers = File.ReadAllLines(borrowerFile)
+                .Skip(1)
+                .Select( line => line.Split(";"))
+                .Select( line => new Borrower
+                {
+                    Name = line[1],
+                    FamilyName = line[2],
+                    Cellphone = int.Parse(line[3])
+                } )
+                .ToList();
+
+            return borrowers;
         }
     }
 }
