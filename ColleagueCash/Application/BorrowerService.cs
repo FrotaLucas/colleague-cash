@@ -23,5 +23,12 @@ namespace ColleagueCash.Application
         {
             _repositoryBorrower.AddNewBorrower(borrower);
         }
+
+        public List<Borrower> GetAllBorrowersByDate() {
+            throw new NotImplementedException();
+        }
+
+      
+
     }
 }
