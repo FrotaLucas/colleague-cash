@@ -77,13 +77,27 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null && borrower.BorrowerId != null) {
 
-                //var loan = File.ReadAllLines(fileName)
-                //    .Skip(1)
-                //    .Select(line => line.Split(";")
-                //    .Where( line => line[])
-                     
+                var listOfLoan = File.ReadAllLines(loanFile)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(line => int.Parse(line[4]) == borrower.BorrowerId)
+                    .OrderBy(line => DateTime.Parse(line[3].ToString() )  )
+                    .Select(line => new Loan
+                    {
+                        LoanId = int.Parse(line[0]),
+                        Description = line[1],
+                        Amount = int.Parse(line[2]),
+                        LoanDate = DateTime.Parse(line[3].ToString() ),
+                        BorrowerId = int.Parse(line[4]),
+                    })
+                    .ToList();
 
+                while (true) {
                 
+
+
+                }
+
 
             }
         }
