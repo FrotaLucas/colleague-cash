@@ -10,5 +10,7 @@
         
         public DateTime LoanDate { get; set; } = DateTime.Now;  
 
+        public int BorrowerId { get; set; }
+
     }
 }
