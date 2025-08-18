@@ -19,7 +19,8 @@ namespace ColleagueCash.Infrastructure
         {
             int id = 0;
 
-            if (File.Exists(lastBorrowerId)) {
+            if (File.Exists(lastBorrowerId))
+            {
                 id = int.Parse(File.ReadAllText(lastBorrowerId));
             }
 
@@ -30,7 +31,7 @@ namespace ColleagueCash.Infrastructure
 
         public void AddNewBorrower(Borrower borrower)
         {
-            int borrowerId  = GetNextId();  
+            int borrowerId = GetNextId();
             string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};{borrower.Cellphone}";
 
             File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
@@ -40,21 +41,25 @@ namespace ColleagueCash.Infrastructure
         {
             var borrowers = File.ReadAllLines(borrowerFile)
                 .Skip(1)
-                .Select( line => line.Split(";"))
-                .Select( line => new Borrower
+                .Select(line => line.Split(";"))
+                .Select(line => new Borrower
                 {
                     Name = line[1],
                     FamilyName = line[2],
                     Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
-                } )
+                })
                 .ToList();
 
             return borrowers;
         }
 
-        public bool BorrowerHasActiveLoan(Borrower borrower)
+        public bool BorrowerHasActiveLoan(string name, string familyName)
         {
-            throw new NotImplementedException();
+            return File.ReadAllLines(borrowerFile)
+                .Skip(1)
+                .Select(line => line.Split(";"))
+                .Any(line => line[1].Contains(name) && line[2].Contains(familyName));
+
         }
     }
 }

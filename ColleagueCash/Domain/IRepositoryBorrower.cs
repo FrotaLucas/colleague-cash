@@ -6,6 +6,6 @@
 
         public List<Borrower> GetAllBorrowers();
 
-        public bool BorrowerHasActiveLoan(Borrower borrower);   
+        public bool BorrowerHasActiveLoan(string Name, string FamilyName);   
     }
 }
