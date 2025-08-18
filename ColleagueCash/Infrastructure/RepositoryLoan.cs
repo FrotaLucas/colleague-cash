@@ -91,11 +91,22 @@ namespace ColleagueCash.Infrastructure
                         BorrowerId = int.Parse(line[4]),
                     })
                     .ToList();
-
-                while (true) {
                 
+                int n = listOfLoan.Count;
+                int i = 0;  
+                while (listOfLoan.Sum(loan => loan.Amount ) < amount ) {
 
+                    if(listOfLoan[i].Amount < amount)
+                    {
+                        listOfLoan[i].Amount = 0;
+                        amount = amount - listOfLoan[i].Amount;
+                        i++;
+                        continue;
+                    }
 
+                    listOfLoan[i].Amount = listOfLoan[i].Amount - amount;
+                    break;
+                   
                 }
 
 
