@@ -8,12 +8,12 @@ using ColleagueCash.Infrastructure;
 
 namespace ColleagueCash.Application
 {
-    public class RegisterBorrower
+    public class BorrowerService
     {
 
         public readonly IRepositoryBorrower _repositoryBorrower;
 
-        public RegisterBorrower(IRepositoryBorrower repositoryBorrower)
+        public BorrowerService(IRepositoryBorrower repositoryBorrower)
         {
             _repositoryBorrower = repositoryBorrower;
         }

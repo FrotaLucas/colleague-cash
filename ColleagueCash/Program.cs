@@ -40,15 +40,14 @@ class Program
 
         Borrower borrower = new Borrower
         {
-            Name = "Lucas",
-            FamilyName = "Dias",
-            Cellphone = 21983773
+            Name = "Leo",
+            FamilyName = "Schirling",
 
         };
 
         IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, borrowerSize);
 
-        RegisterBorrower registerBorrower = new RegisterBorrower(repositoryBorrower);
+        BorrowerService registerBorrower = new BorrowerService(repositoryBorrower);
 
         repositoryBorrower.AddNewBorrower(borrower);
     }
