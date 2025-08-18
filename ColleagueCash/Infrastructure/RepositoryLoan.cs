@@ -16,7 +16,7 @@ namespace ColleagueCash.Infrastructure
 
         public void AddNewLoan(Loan loan, Borrower borrower)
         {
-            var storedBorrower = _repositoryBorrower.BorrowerHasActiveLoan(borrower.Name, borrower.FamilyName);
+            var storedBorrower = _repositoryBorrower.ExistedBorrower(borrower.Name, borrower.FamilyName);
             var date = DateTime.Now;
             string newRegistration;
 
@@ -25,7 +25,7 @@ namespace ColleagueCash.Infrastructure
             {
                 newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(fileName, newRegistration + Environment.NewLine);
-
+                return;
             }
 
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
@@ -54,7 +54,13 @@ namespace ColleagueCash.Infrastructure
 
         public void ReduceLoan(string name, string familyName, decimal amount)
         {
+            var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
 
+            if (borrower != null && borrower.BorrowerId != null) {
+
+                int borrowerId = borrower.BorrowerId;
+
+            }
         }
 
     }
