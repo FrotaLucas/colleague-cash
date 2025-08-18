@@ -5,7 +5,7 @@
         public void AddNewBorrower(Borrower borrower);
 
         public List<Borrower> GetAllBorrowers();
-        // pq esse erro?
-        public bool BorrowerHasActiveLoan(string Name, string FamilyName);   
+
+        public Borrower BorrowerHasActiveLoan(string Name, string FamilyName);   
     }
 }

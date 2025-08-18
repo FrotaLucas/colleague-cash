@@ -53,12 +53,23 @@ namespace ColleagueCash.Infrastructure
             return borrowers;
         }
 
-        public bool BorrowerHasActiveLoan(string name, string familyName)
+        public Borrower BorrowerHasActiveLoan(string name, string familyName)
         {
-            return File.ReadAllLines(borrowerFile)
+            var borrower = File.ReadAllLines(borrowerFile)
                 .Skip(1)
                 .Select(line => line.Split(";"))
-                .Any(line => line[1].Contains(name) && line[2].Contains(familyName));
+                .Where(line => line[1].Contains(name) && line[2].Contains(familyName))
+                .Select(line => new Borrower
+                {
+                    BorrowerId = int.Parse(line[0]),
+                    Name = line[1],
+                    FamilyName = line[2],
+                    Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
+
+                })
+                .FirstOrDefault();
+
+            return borrower;
 
         }
     }
