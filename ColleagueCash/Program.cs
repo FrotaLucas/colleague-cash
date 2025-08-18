@@ -18,20 +18,7 @@ class Program
 
         //last id borrower
         string borrowerIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerSize = Path.Combine(borrowerIdPath, "WorkLoad\\last-id.txt");
-
-
-        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
-
-        var loanService = new LoanService(repositoryLoan);
-
-        //loanService.Execute();
-
-        Loan loan = new Loan
-        {
-            Description = "Sushi",
-            Amount = 100,   
-        };
+        string borrowerSize = Path.Combine(borrowerIdPath, "WorkLoad\\last-borrowerid.txt");
 
 
         //BorrowerService
@@ -50,13 +37,28 @@ class Program
 
         //borrowerService.AddNewBorrower(borrower);
 
-        var borrowers = borrowerService.GetAllBorrowersByName();
-        foreach(var item in borrowers)
+        //var borrowers = borrowerService.GetAllBorrowersByName();
+        //foreach (var item in borrowers)
+        //{
+        //    Console.WriteLine(item.Name);
+        //    Console.WriteLine(item.FamilyName);
+        //    Console.WriteLine(item.Cellphone);
+        //}
+
+        //Loan 
+        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, repositoryBorrower);
+
+        var loanService = new LoanService(repositoryLoan);
+
+        //loanService.Execute();
+
+        Loan loan = new Loan
         {
-            Console.WriteLine(item.Name);
-            Console.WriteLine(item.FamilyName);
-            Console.WriteLine(item.Cellphone);
-        }
+            Description = "Sushi",
+            Amount = 100,   
+        };
+
+        loanService.RegisterNewLoan(loan, borrower);
 
     }
 }
