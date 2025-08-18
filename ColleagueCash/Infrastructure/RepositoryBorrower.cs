@@ -52,6 +52,10 @@ namespace ColleagueCash.Infrastructure
             return borrowers;
         }
 
+        public Borrower GetBorrower(Borrower borrower)
+        {
+
+        }
 
     }
 }
