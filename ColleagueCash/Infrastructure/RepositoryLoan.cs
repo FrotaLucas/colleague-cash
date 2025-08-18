@@ -55,13 +55,19 @@ namespace ColleagueCash.Infrastructure
 
         }
 
-        public void GetNextId()
+        public int GetNextId()
         {
             int id = 0;
 
+            if (File.Exists(loanIdFile)) {
 
+                id = int.Parse(File.ReadAllText(loanIdFile));
 
-            throw new NotImplementedException();
+            }
+
+            int newId = id + 1;
+            File.WriteAllText(loanIdFile, newId.ToString());
+            return newId;
         }
 
         public void ReduceLoan(string name, string familyName, decimal amount)
