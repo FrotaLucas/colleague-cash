@@ -6,5 +6,7 @@
 
         public List<Loan> GetAllLoans();
 
+        public void ReduceLoan(string name, string familyName, decimal amount);
+
     }
 }

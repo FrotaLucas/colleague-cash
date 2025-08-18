@@ -52,7 +52,7 @@ namespace ColleagueCash.Infrastructure
 
         }
 
-        public void ReduceLoan(string name, decimal amount)
+        public void ReduceLoan(string name, string familyName, decimal amount)
         {
 
         }
