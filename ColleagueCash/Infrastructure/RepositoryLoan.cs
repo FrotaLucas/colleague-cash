@@ -58,7 +58,13 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null && borrower.BorrowerId != null) {
 
-                int borrowerId = borrower.BorrowerId;
+                //var loan = File.ReadAllLines(fileName)
+                //    .Skip(1)
+                //    .Select(line => line.Split(";")
+                //    .Where( line => line[])
+                     
+
+                
 
             }
         }
