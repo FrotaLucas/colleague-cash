@@ -36,7 +36,9 @@ namespace ColleagueCash.Application
 
         public List<Borrower> GetAllBorrowersByName()
         {
-            throw new NotImplementedException();
+            var borrowers = _repositoryBorrower.GetAllBorrowers()
+                .OrderBy( borrower => borrower.Name ).ToList();
+            return borrowers;
         }
 
     }
