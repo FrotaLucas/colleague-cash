@@ -22,18 +22,19 @@ namespace ColleagueCash.Infrastructure
             var storedBorrower = _repositoryBorrower.ExistedBorrower(borrower.Name, borrower.FamilyName);
             var date = DateTime.Now;
             string newRegistration;
+            int idRegistration = GetNextId();   
 
             if (storedBorrower != null)
 
             {
-                newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
+                newRegistration = $"{idRegistration};{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
                 return;
             }
 
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
 
-            newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
+            newRegistration = $"{idRegistration};{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
             File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
 
         }
