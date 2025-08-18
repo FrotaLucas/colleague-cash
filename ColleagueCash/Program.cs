@@ -24,7 +24,6 @@ class Program
         IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
 
         var listLoanHandler = new ListLoanHandler(repositoryLoan);
-        var registerLoanHandler = new RegisterLoanHandler(repositoryLoan);
 
         //listLoanHandler.Execute();
 
@@ -34,8 +33,8 @@ class Program
             Amount = 100,   
         };
 
-        registerLoanHandler.Execute(loan);
 
+        //BorrowerService
 
 
         Borrower borrower = new Borrower
@@ -47,8 +46,7 @@ class Program
 
         IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, borrowerSize);
 
-        BorrowerService registerBorrower = new BorrowerService(repositoryBorrower);
+        BorrowerService borrowerService = new BorrowerService(repositoryBorrower);
 
-        repositoryBorrower.AddNewBorrower(borrower);
     }
 }
