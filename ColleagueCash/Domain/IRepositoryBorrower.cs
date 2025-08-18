@@ -6,7 +6,7 @@
 
         public List<Borrower> GetAllBorrowers();
 
-        public Borrower BorrowerHasActiveLoan(string Name, string FamilyName);   
+        public Borrower ExistedBorrower(string Name, string FamilyName);   
 
         public int GetNextId();
     }

@@ -62,7 +62,7 @@ namespace ColleagueCash.Infrastructure
             return borrowers;
         }
 
-        public Borrower BorrowerHasActiveLoan(string name, string familyName)
+        public Borrower ExistedBorrower(string name, string familyName)
         {
             var borrower = File.ReadAllLines(borrowerFile)
                 .Skip(1)
