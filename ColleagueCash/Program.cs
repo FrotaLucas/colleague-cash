@@ -23,9 +23,9 @@ class Program
 
         IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
 
-        var listLoanHandler = new LoanService(repositoryLoan);
+        var loanService = new LoanService(repositoryLoan);
 
-        //listLoanHandler.Execute();
+        //loanService.Execute();
 
         Loan loan = new Loan
         {
