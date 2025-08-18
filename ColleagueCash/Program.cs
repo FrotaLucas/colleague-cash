@@ -20,6 +20,10 @@ class Program
         string borrowerIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
         string borrowerSize = Path.Combine(borrowerIdPath, "WorkLoad\\last-borrowerid.txt");
 
+        //last id borrower
+        string loanIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+        string loanSize = Path.Combine(loanIdPath, "WorkLoad\\last-loanId.txt");
+
 
         //BorrowerService
 
@@ -46,7 +50,7 @@ class Program
         //}
 
         //Loan 
-        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, repositoryBorrower);
+        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, loanSize, repositoryBorrower);
 
         var loanService = new LoanService(repositoryLoan);
 
