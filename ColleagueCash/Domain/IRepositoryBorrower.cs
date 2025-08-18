@@ -2,7 +2,7 @@
 {
     public interface IRepositoryBorrower
     {
-        public void AddNewBorrower(Borrower borrower);
+        public Borrower AddNewBorrower(Borrower borrower);
 
         public List<Borrower> GetAllBorrowers();
 

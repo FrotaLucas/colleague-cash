@@ -29,12 +29,21 @@ namespace ColleagueCash.Infrastructure
             return newId;
         }
 
-        public void AddNewBorrower(Borrower borrower)
+        public Borrower AddNewBorrower(Borrower borrower)
         {
             int borrowerId = GetNextId();
+            var newBorrower = new Borrower() { 
+                BorrowerId = borrowerId,
+                Name = borrower.Name,
+                FamilyName = borrower.FamilyName,
+                Cellphone = borrower.Cellphone,
+            };
+            
             string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};{borrower.Cellphone}";
 
             File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
+
+            return newBorrower;
         }
 
         public List<Borrower> GetAllBorrowers()
