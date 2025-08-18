@@ -28,7 +28,10 @@ namespace ColleagueCash.Application
             throw new NotImplementedException();
         }
 
-      
+        public List<Borrower> GetAllBorrowersByName()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
