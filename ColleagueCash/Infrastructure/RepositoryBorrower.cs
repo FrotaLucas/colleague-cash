@@ -52,10 +52,9 @@ namespace ColleagueCash.Infrastructure
             return borrowers;
         }
 
-        public Borrower GetBorrower(Borrower borrower)
+        public bool BorrowerHasActiveLoan(Borrower borrower)
         {
-
+            throw new NotImplementedException();
         }
-
     }
 }

@@ -5,5 +5,7 @@
         public void AddNewBorrower(Borrower borrower);
 
         public List<Borrower> GetAllBorrowers();
+
+        public bool BorrowerHasActiveLoan(Borrower borrower);   
     }
 }
