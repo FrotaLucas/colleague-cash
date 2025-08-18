@@ -16,16 +16,21 @@ namespace ColleagueCash.Infrastructure
 
         public void AddNewRegistration(Loan loan, Borrower borrower)
         {
-            var storedBorrowed = _repositoryBorrower.BorrowerHasActiveLoan(borrower.Name, borrower.FamilyName);
+            var storedBorrower = _repositoryBorrower.BorrowerHasActiveLoan(borrower.Name, borrower.FamilyName);
             var date = DateTime.Now;
+            string newRegistration;
 
-            if (storedBorrowed != null)
+            if (storedBorrower != null)
             {
-                string newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrowed.BorrowerId}";
+                newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
             }
 
+            Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
+
+            newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
+            File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
         }
 
