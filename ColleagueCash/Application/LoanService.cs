@@ -23,7 +23,7 @@ namespace ColleagueCash.Application
 
         public void RegisterNewLoan(Loan loan, Borrower borrower)
         {
-
+            _repositoryLoan.AddNewRegistration(loan, borrower); 
         }
     }
 }
