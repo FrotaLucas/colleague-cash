@@ -45,7 +45,7 @@ namespace ColleagueCash.Infrastructure
                 {
                     Name = line[1],
                     FamilyName = line[2],
-                    Cellphone = int.Parse(line[3])
+                    Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
                 } )
                 .ToList();
 
