@@ -6,9 +6,9 @@ namespace ColleagueCash.Infrastructure
     {
         private readonly string fileName;
 
-        public RepositoryBorrower _repositoryBorrower;
+        public IRepositoryBorrower _repositoryBorrower;
 
-        public RepositoryLoan(string fileName, RepositoryBorrower repositoryBorrower)
+        public RepositoryLoan(string fileName, IRepositoryBorrower repositoryBorrower)
         {
             this.fileName = fileName;
             _repositoryBorrower = repositoryBorrower;
@@ -21,11 +21,10 @@ namespace ColleagueCash.Infrastructure
 
             if (storedBorrowed != null)
             {
-                string newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{borrower.BorrowerId}";
+                string newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrowed.BorrowerId}";
                 File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
             }
-
 
 
         }
