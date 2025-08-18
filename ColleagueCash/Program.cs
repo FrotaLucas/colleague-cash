@@ -23,7 +23,7 @@ class Program
 
         IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile);
 
-        var listLoanHandler = new ListLoanHandler(repositoryLoan);
+        var listLoanHandler = new LoanService(repositoryLoan);
 
         //listLoanHandler.Execute();
 
@@ -39,8 +39,8 @@ class Program
 
         Borrower borrower = new Borrower
         {
-            Name = "Leo",
-            FamilyName = "Schirling",
+            Name = "Nathan",
+            FamilyName = "Otta",
 
         };
 
@@ -48,5 +48,6 @@ class Program
 
         BorrowerService borrowerService = new BorrowerService(repositoryBorrower);
 
+        borrowerService.AddNewBorrower(borrower);
     }
 }

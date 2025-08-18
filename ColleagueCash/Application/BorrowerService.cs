@@ -19,7 +19,7 @@ namespace ColleagueCash.Application
         }
 
 
-        public void Execute(Borrower borrower)
+        public void AddNewBorrower(Borrower borrower)
         {
             _repositoryBorrower.AddNewBorrower(borrower);
         }

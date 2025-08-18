@@ -7,11 +7,11 @@ using ColleagueCash.Domain;
 
 namespace ColleagueCash.Application
 {
-    public class ListLoanHandler
+    public class LoanService
     {
         private IRepositoryLoan _repositoryLoan;
 
-        public ListLoanHandler(IRepositoryLoan repositoryLoan)
+        public LoanService(IRepositoryLoan repositoryLoan)
         {
             _repositoryLoan = repositoryLoan;
         }
