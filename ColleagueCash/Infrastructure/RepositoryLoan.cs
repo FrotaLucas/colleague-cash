@@ -6,18 +6,27 @@ namespace ColleagueCash.Infrastructure
     {
         private readonly string fileName;
 
-        public RepositoryLoan(string fileName)
+        public RepositoryBorrower _repositoryBorrower;
+
+        public RepositoryLoan(string fileName, RepositoryBorrower repositoryBorrower)
         {
             this.fileName = fileName;
+            _repositoryBorrower = repositoryBorrower;
         }
 
         public void AddNewRegistration(Loan loan, Borrower borrower)
         {
+            var storedBorrowed = _repositoryBorrower.BorrowerHasActiveLoan(borrower.Name, borrower.FamilyName);
+            var date = DateTime.Now;
+
+            if (storedBorrowed != null)
+            {
+                string newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{borrower.BorrowerId}";
+                File.AppendAllText(fileName, newRegistration + Environment.NewLine);
+
+            }
 
 
-            string newRegistration = $"{loan.Description};{loan.Amount}";
-
-            File.AppendAllText(fileName, newRegistration + Environment.NewLine);
 
         }
 
