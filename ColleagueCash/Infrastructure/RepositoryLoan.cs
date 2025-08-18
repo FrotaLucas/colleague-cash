@@ -21,6 +21,7 @@ namespace ColleagueCash.Infrastructure
             string newRegistration;
 
             if (storedBorrower != null)
+
             {
                 newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(fileName, newRegistration + Environment.NewLine);
