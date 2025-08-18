@@ -14,7 +14,7 @@ namespace ColleagueCash.Infrastructure
             _repositoryBorrower = repositoryBorrower;
         }
 
-        public void AddNewRegistration(Loan loan, Borrower borrower)
+        public void AddNewLoan(Loan loan, Borrower borrower)
         {
             var storedBorrower = _repositoryBorrower.BorrowerHasActiveLoan(borrower.Name, borrower.FamilyName);
             var date = DateTime.Now;
