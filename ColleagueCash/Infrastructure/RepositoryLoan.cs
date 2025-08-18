@@ -4,13 +4,16 @@ namespace ColleagueCash.Infrastructure
 {
     public class RepositoryLoan : IRepositoryLoan
     {
-        private readonly string fileName;
+        private readonly string loanFile;
+
+        private readonly string loanIdFile;
 
         public IRepositoryBorrower _repositoryBorrower;
 
-        public RepositoryLoan(string fileName, IRepositoryBorrower repositoryBorrower)
+        public RepositoryLoan(string loanFile, string loandIdFile, IRepositoryBorrower repositoryBorrower)
         {
-            this.fileName = fileName;
+            this.loanFile = loanFile;
+            this.loanIdFile = loandIdFile;  
             _repositoryBorrower = repositoryBorrower;
         }
 
@@ -24,20 +27,20 @@ namespace ColleagueCash.Infrastructure
 
             {
                 newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
-                File.AppendAllText(fileName, newRegistration + Environment.NewLine);
+                File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
                 return;
             }
 
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
 
             newRegistration = $"{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
-            File.AppendAllText(fileName, newRegistration + Environment.NewLine);
+            File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
 
         }
 
         public List<Loan> GetAllLoans()
         {
-            var loans = File.ReadAllLines(fileName)
+            var loans = File.ReadAllLines(loanFile)
                 .Skip(1)
                 .Select(line => line.Split(";"))
                 .Select(line => new Loan
@@ -54,6 +57,9 @@ namespace ColleagueCash.Infrastructure
 
         public void GetNextId()
         {
+            int id = 0;
+
+
 
             throw new NotImplementedException();
         }
