@@ -8,5 +8,6 @@
 
         public void ReduceLoan(string name, string familyName, decimal amount);
 
+        public void GetNextId();
     }
 }

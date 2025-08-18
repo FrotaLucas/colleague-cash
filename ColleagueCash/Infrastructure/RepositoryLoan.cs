@@ -52,6 +52,12 @@ namespace ColleagueCash.Infrastructure
 
         }
 
+        public void GetNextId()
+        {
+
+            throw new NotImplementedException();
+        }
+
         public void ReduceLoan(string name, string familyName, decimal amount)
         {
             var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
