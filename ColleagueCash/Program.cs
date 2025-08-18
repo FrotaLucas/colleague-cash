@@ -48,6 +48,15 @@ class Program
 
         BorrowerService borrowerService = new BorrowerService(repositoryBorrower);
 
-        borrowerService.AddNewBorrower(borrower);
+        //borrowerService.AddNewBorrower(borrower);
+
+        var borrowers = borrowerService.GetAllBorrowersByName();
+        foreach(var item in borrowers)
+        {
+            Console.WriteLine(item.Name);
+            Console.WriteLine(item.FamilyName);
+            Console.WriteLine(item.Cellphone);
+        }
+
     }
 }
