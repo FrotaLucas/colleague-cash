@@ -20,5 +20,10 @@ namespace ColleagueCash.Application
 
             Console.WriteLine("nome com a:" + list[0].Description);
         }
+
+        public void RegisterNewLoan(Loan loan, Borrower borrower)
+        {
+
+        }
     }
 }
