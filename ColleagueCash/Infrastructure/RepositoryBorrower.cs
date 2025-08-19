@@ -32,13 +32,20 @@ namespace ColleagueCash.Infrastructure
         public Borrower AddNewBorrower(Borrower borrower)
         {
             int borrowerId = GetNextId();
-            var newBorrower = new Borrower() { 
+
+            if (!File.Exists(borrowerFile))
+            {
+                File.WriteAllText(borrowerFile, "id;name;familyName;cellphone" + Environment.NewLine);
+            }
+
+            var newBorrower = new Borrower()
+            {
                 BorrowerId = borrowerId,
                 Name = borrower.Name,
                 FamilyName = borrower.FamilyName,
                 Cellphone = borrower.Cellphone,
             };
-            
+
             string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};{borrower.Cellphone}";
 
             File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
@@ -64,8 +71,16 @@ namespace ColleagueCash.Infrastructure
 
         public Borrower ExistedBorrower(string name, string familyName)
         {
-            var borrower = File.ReadAllLines(borrowerFile)
-                .Skip(1)
+            if(!File.Exists(borrowerFile))
+                File.WriteAllText(borrowerFile, "id;name;familyName;cellphone" + Environment.NewLine);
+
+            var lines = File.ReadAllLines(borrowerFile).Skip(1);
+
+
+            if (!lines.Any())
+                return null;
+            
+            var borrower = lines
                 .Select(line => line.Split(";"))
                 .Where(line => line[1].Contains(name) && line[2].Contains(familyName))
                 .Select(line => new Borrower
