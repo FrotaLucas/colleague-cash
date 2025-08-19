@@ -77,7 +77,9 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null && borrower.BorrowerId != null) {
 
-                var listOfLoan = File.ReadAllLines(loanFile)
+                var allLines  = File.ReadAllLines(loanFile).ToList();
+
+                var listOfLoan = allLines
                     .Skip(1)
                     .Select(line => line.Split(";"))
                     .Where(line => int.Parse(line[4]) == borrower.BorrowerId)
@@ -111,13 +113,26 @@ namespace ColleagueCash.Infrastructure
                 }
                 
                 if(amount > 0)
-                    Console.WriteLine($"Warinin: Payment amount exceeds the total loan");
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan");
+
+                List<string> updatedFile = new List<string> { allLines.First() };
+                foreach (var line in allLines.Skip(1)) 
+                {
+                    var parts = line.Split(";");
+
+
+                    var updatedLoan = listOfLoan.SingleOrDefault(l => l.LoanId == int.Parse(parts[0]));
+
+                    if (updatedLoan != null)
+                        parts[2] = updatedLoan.Amount.ToString();
+
+
+                    updatedFile.Add(string.Join(";", parts));
+
+                }
 
                 
-
-
-                
-
+                File.WriteAllLines(loanFile, updatedFile);  
 
             }
         }
