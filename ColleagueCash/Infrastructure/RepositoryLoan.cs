@@ -46,14 +46,29 @@ namespace ColleagueCash.Infrastructure
                 .Select(line => line.Split(";"))
                 .Select(line => new Loan
                 {
-                    Description = line[0],
-                    Amount = Decimal.Parse(line[1])
+                    Description = line[1],
+                    Amount = Decimal.Parse(line[2]),
+                    LoanDate = DateTime.Parse(line[3])
                 })
                 .ToList();
 
             return loans;
 
 
+        }
+
+        public List<Loan> GetAllLoansByPerson(string name, string familyName)
+        {
+            var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
+             
+            var loans = new List<Loan>();   
+
+            if (borrower != null)
+            {
+
+            }
+
+            return loans;
         }
 
         public int GetNextId()
