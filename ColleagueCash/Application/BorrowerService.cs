@@ -13,19 +13,19 @@ namespace ColleagueCash.Application
         }
 
 
-        public void AddNewBorrower(Borrower borrower)
-        {
-            _repositoryBorrower.AddNewBorrower(borrower);
-        }
+        //public void AddNewBorrower(Borrower borrower)
+        //{
+        //    _repositoryBorrower.AddNewBorrower(borrower);
+        //}
 
-        public List<Borrower> GetAllBorrowersByFamilyName() {
+        //public List<Borrower> GetAllBorrowersByFamilyName() {
 
-            var borrowers = _repositoryBorrower.GetAllBorrowers()
-                .OrderBy( borrower => borrower.FamilyName )
-                .ToList();  
+        //    var borrowers = _repositoryBorrower.GetAllBorrowers()
+        //        .OrderBy( borrower => borrower.FamilyName )
+        //        .ToList();  
 
-            return borrowers;
-        }
+        //    return borrowers;
+        //}
 
 
         public List<Borrower> GetAllBorrowersByName()
