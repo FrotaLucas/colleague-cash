@@ -22,7 +22,10 @@ namespace ColleagueCash.Infrastructure
             var storedBorrower = _repositoryBorrower.ExistedBorrower(name, familyName);
             var date = DateTime.Now;
             string newRegistration;
-            int idRegistration = GetNextId();   
+            int idRegistration = GetNextId();
+
+            if (!File.Exists(loanFile))
+                File.WriteAllText(loanFile, "id;description;amount;date;idBorrower" + Environment.NewLine);
 
             if (storedBorrower != null)
             {
