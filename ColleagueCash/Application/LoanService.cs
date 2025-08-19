@@ -37,12 +37,20 @@ namespace ColleagueCash.Application
             }
         }
 
-        public List<Loan> DisplayAllLoansByDate()
+        public void DisplayAllLoansByDate()
         {
-            var list = _repositoryLoan.GetAllLoans()
-                .OrderByDescending(loan => loan.LoanDate)
-                .ToList();
-            return list;
+            var loans = _repositoryLoan.GetAllLoans()
+                .Where(loan => loan.Amount > 0)
+                .OrderByDescending(loan => loan.LoanDate);
+
+            foreach (var loan in loans)
+            {
+                Console.WriteLine(
+                    $"Outstanding amount: {loan.Amount} - " +
+                    $"Description: {loan.Description} - " +
+                    $"Date of registration: {loan.LoanDate}"
+                );
+            }
         }
 
         public List<Loan> DisplayAllLoanByName(string name, string familyName)
