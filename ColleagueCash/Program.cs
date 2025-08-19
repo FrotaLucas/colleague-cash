@@ -37,10 +37,11 @@ class Program
             Console.WriteLine("\n=== Loan Tracker ===");
             Console.WriteLine("1 - Register new Loan");
             Console.WriteLine("2 - Settling a colleague debt");
-            Console.WriteLine("3 - List all debts"); //By amount
+            Console.WriteLine("3 - List all debts ordered by amount"); //By amount
             Console.WriteLine("4 - List all debts ordered by date");
             Console.WriteLine("5 - List all debts of a colleague");
-            Console.WriteLine("0 - Sair");
+            Console.WriteLine("6 - List all your colleague");
+            Console.WriteLine("0 - Exit");
             Console.Write("Your option: ");
 
             var choice = Console.ReadLine();
@@ -119,6 +120,10 @@ class Program
                     familyName = fullName5[1];
 
                     loanService.DisplayAllLoanByName(name, familyName); 
+                    break;
+
+                case "6":
+                    borrowerService.GetAllBorrowersByName();
                     break;
 
                 case "0":
