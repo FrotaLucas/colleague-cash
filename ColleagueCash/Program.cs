@@ -75,7 +75,7 @@ class Program
                         description = Console.ReadLine();
                      
                         loanService.RegisterNewLoan(amount, description, name, familyName );
-                        Console.WriteLine("✅ Loan registered!");
+                        Console.WriteLine("Loan registered!");
                     }
 
                     else
@@ -95,7 +95,7 @@ class Program
                     if (decimal.TryParse(Console.ReadLine(), out amount))
                     {
                         loanService.ReduceLoan(name, familyName, amount);
-                        Console.WriteLine("✅ Payment registered!");
+                        Console.WriteLine("Payment registered!");
                     }
 
                     else
@@ -130,7 +130,7 @@ class Program
                     return;
 
                 default:
-                    Console.WriteLine("wrong option. Choose a number from menu");
+                    Console.WriteLine("Wrong option! Choose a number from menu.");
                     break;
             }
         }
