@@ -53,10 +53,19 @@ namespace ColleagueCash.Application
             }
         }
 
-        public List<Loan> DisplayAllLoanByName(string name, string familyName)
+        public void DisplayAllLoanByName(string name, string familyName)
         {
-            var list = _repositoryLoan.GetAllLoansByPerson(name, familyName);
-            return list;
+            var loans = _repositoryLoan.GetAllLoansByPerson(name, familyName);
+
+            foreach (var loan in loans)
+            {
+                Console.WriteLine(
+                    $"Outstanding amount: {loan.Amount} - " +
+                    $"Description: {loan.Description} - " +
+                    $"Date of registration: {loan.LoanDate}"
+                );
+            }
+
         }
 
         //DESNECESSARIO
