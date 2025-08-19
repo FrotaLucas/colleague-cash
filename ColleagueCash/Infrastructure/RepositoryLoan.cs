@@ -93,22 +93,25 @@ namespace ColleagueCash.Infrastructure
                     .ToList();
 
                 int i = 0;
-                while (amount > 0)
+                while (amount > 0 && i < listOfLoan.Count)
                 {
-                    if (listOfLoan[i].Amount <= amount )
+                    if (amount >= listOfLoan[i].Amount)
                     {
                         listOfLoan[i].Amount = 0;
-                        amount = listOfLoan[i].Amount - amount;
+                        amount -= listOfLoan[i].Amount;
                     }
 
                     else
                     {
-                        listOfLoan[i].Amount = listOfLoan[i].Amount - amount;
+                        listOfLoan[i].Amount -= amount;
                         amount = 0;
                     }
                     
                     i++;
                 }
+
+
+
                 
 
 
