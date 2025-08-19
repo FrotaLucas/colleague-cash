@@ -104,6 +104,7 @@ namespace ColleagueCash.Infrastructure
                     else
                     {
                         listOfLoan[i].Amount = listOfLoan[i].Amount - amount;
+                        amount = 0;
                     }
                     
                     i++;
