@@ -99,8 +99,8 @@ namespace ColleagueCash.Infrastructure
                 {
                     if (amount >= listOfLoan[i].Amount)
                     {
-                        listOfLoan[i].Amount = 0;
                         amount -= listOfLoan[i].Amount;
+                        listOfLoan[i].Amount = 0;
                     }
 
                     else
