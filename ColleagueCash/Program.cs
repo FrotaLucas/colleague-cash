@@ -40,7 +40,7 @@ class Program
             Console.WriteLine("3 - List all debts ordered by amount"); //By amount
             Console.WriteLine("4 - List all debts ordered by date");
             Console.WriteLine("5 - List all debts of a colleague");
-            Console.WriteLine("6 - List all your colleague");
+            Console.WriteLine("6 - List all your colleagues");
             Console.WriteLine("0 - Exit");
             Console.Write("Your option: ");
 
