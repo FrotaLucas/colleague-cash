@@ -21,12 +21,20 @@ namespace ColleagueCash.Application
             _repositoryLoan.ReduceLoan(name, familyName, amount);
         }
 
-        public List<Loan> DisplayAllLoansByAmount()
+        public void DisplayAllLoansByAmount()
         {
-            var list = _repositoryLoan.GetAllLoans()
-                .OrderByDescending(loan => loan.Amount)
-                .ToList();
-            return list;
+            var loans = _repositoryLoan.GetAllLoans()
+                .Where(loan => loan.Amount > 0)
+                .OrderByDescending(loan => loan.Amount);
+
+            foreach (var loan in loans)                      
+            {
+                Console.WriteLine(
+                    $"Outstanding amount: {loan.Amount} - " +
+                    $"Description: {loan.Description} - " +
+                    $"Date of registration: {loan.LoanDate}"
+                );
+            }
         }
 
         public List<Loan> DisplayAllLoansByDate()
