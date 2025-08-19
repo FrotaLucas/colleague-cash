@@ -174,7 +174,7 @@ namespace ColleagueCash.Infrastructure
 
             }
 
-            Console.WriteLine("Colleage not saved in the list");
+            Console.WriteLine("Colleage not registered yet.");
         
         }
 
