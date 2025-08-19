@@ -25,7 +25,6 @@ namespace ColleagueCash.Infrastructure
             int idRegistration = GetNextId();   
 
             if (storedBorrower != null)
-
             {
                 newRegistration = $"{idRegistration};{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
@@ -65,7 +64,17 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null)
             {
-
+                loans = File.ReadAllLines(loanFile)
+                    .Skip(1)
+                    .Select(line => line.Split(";"))
+                    .Where(parts => int.Parse(parts[3]) == borrower.BorrowerId)
+                    .Select(line => new Loan
+                      {
+                          Description = line[1],
+                          Amount = Decimal.Parse(line[2]),
+                          LoanDate = DateTime.Parse(line[3])
+                      })
+                    .ToList();
             }
 
             return loans;
