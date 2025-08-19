@@ -86,9 +86,7 @@ namespace ColleagueCash.Infrastructure
 
             if (File.Exists(loanIdFile))
             {
-
                 id = int.Parse(File.ReadAllText(loanIdFile));
-
             }
 
             int newId = id + 1;
