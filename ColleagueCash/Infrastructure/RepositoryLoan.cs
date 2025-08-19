@@ -49,6 +49,11 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoans()
         {
+            if (!File.Exists(loanFile) || !File.ReadAllLines(loanFile).Skip(1).Any())
+            {
+                Console.WriteLine("There are no loans registered;");
+                return new List<Loan>();    
+            }
 
             var loans = File.ReadAllLines(loanFile)
                 .Skip(1)
