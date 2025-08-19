@@ -21,27 +21,18 @@ namespace ColleagueCash.Application
             _repositoryLoan.ReduceLoan(name, familyName, amount);
         }
 
+        public List<Loan> DisplayAllLoansByAmount()
+        {
+            var list = _repositoryLoan.GetAllLoans()
+                .OrderByDescending(loan => loan.Amount)
+                .ToList();
+            return list;
+        }
 
         public List<Loan> DisplayAllLoansByDate()
         {
             var list = _repositoryLoan.GetAllLoans()
                 .OrderByDescending(loan => loan.LoanDate)
-                .ToList();
-            return list;
-        }
-
-        public List<Loan> DisplayAllLoansByDescription()
-        {
-            var list = _repositoryLoan.GetAllLoans()
-                .OrderBy( loan => loan.Description)
-                .ToList();  
-            return list;
-        }
-
-        public List<Loan> DisplayAllLoansByAmount()
-        {
-            var list = _repositoryLoan.GetAllLoans()
-                .OrderByDescending(loan => loan.Amount)
                 .ToList();
             return list;
         }
@@ -52,6 +43,14 @@ namespace ColleagueCash.Application
             return list;
         }
 
-      
+        //DESNECESSARIO
+        //public List<Loan> DisplayAllLoansByDescription()
+        //{
+        //    var list = _repositoryLoan.GetAllLoans()
+        //        .OrderBy( loan => loan.Description)
+        //        .ToList();  
+        //    return list;
+        //}
+
     }
 }
