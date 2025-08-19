@@ -56,7 +56,7 @@ class Program
             {
                 case "1":
                     Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName1 = Console.ReadLine().Split(' ');
+                    var fullName1 = Console.ReadLine().ToLower().Split(' ');
 
                     name = fullName1[0];
                     familyName = fullName1[1];
@@ -86,7 +86,7 @@ class Program
 
                 case "2":
                     Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName = Console.ReadLine().Split(' ');
+                    var fullName = Console.ReadLine().ToLower().Split(' ');
 
                     name = fullName[0];
                     familyName = fullName[1];
@@ -114,7 +114,7 @@ class Program
 
                 case "5":
                     Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName5 = Console.ReadLine().Split(' ');
+                    var fullName5 = Console.ReadLine().ToLower().Split(' ');
 
                     name = fullName5[0];
                     familyName = fullName5[1];
@@ -130,7 +130,7 @@ class Program
                     return;
 
                 default:
-                    Console.WriteLine("wrong option.");
+                    Console.WriteLine("wrong option. Choose a number from menu");
                     break;
             }
         }
