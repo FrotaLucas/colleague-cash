@@ -11,23 +11,26 @@ namespace ColleagueCash.Application
             _repositoryLoan = repositoryLoan;
         }
 
-
-        public void DisplayAllLoansByDescripttion()
+        public List<Loan> DisplayAllLoansByDescription()
         {
             var list = _repositoryLoan.GetAllLoans()
                 .OrderBy( loan => loan.Description)
                 .ToList();  
-
-            Console.WriteLine("nome com a:" + list[0].Description);
+            return list;
         }
 
-        public void DisplayAllLoansByAmount()
+        public List<Loan> DisplayAllLoansByAmount()
         {
             var list = _repositoryLoan.GetAllLoans()
                 .OrderByDescending(loan => loan.Amount)
                 .ToList();
+            return list;
+        }
 
-            Console.WriteLine("nome com a:" + list[0].Description);
+        public List<Loan> DisplayAllLoanByName(string name, string familyName)
+        {
+            var list = _repositoryLoan.GetAllLoansByPerson(name, familyName);
+            return list;
         }
 
         public void RegisterNewLoan(Loan loan, Borrower borrower)
