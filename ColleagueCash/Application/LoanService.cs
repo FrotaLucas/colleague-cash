@@ -12,11 +12,20 @@ namespace ColleagueCash.Application
         }
 
 
-        public void DisplayAllLoans()
+        public void DisplayAllLoansByDescripttion()
         {
             var list = _repositoryLoan.GetAllLoans()
                 .OrderBy( loan => loan.Description)
                 .ToList();  
+
+            Console.WriteLine("nome com a:" + list[0].Description);
+        }
+
+        public void DisplayAllLoansByAmount()
+        {
+            var list = _repositoryLoan.GetAllLoans()
+                .OrderByDescending(loan => loan.Amount)
+                .ToList();
 
             Console.WriteLine("nome com a:" + list[0].Description);
         }
