@@ -119,11 +119,11 @@ class Program
                     name = fullName5[0];
                     familyName = fullName5[1];
 
-                    loanService.DisplayAllLoanByName(name, familyName); 
+                    loanService.DisplayAllLoansOfColleague(name, familyName); 
                     break;
 
                 case "6":
-                    borrowerService.GetAllBorrowersByName();
+                    borrowerService.GetAllBorrowersOrderedByName();
                     break;
 
                 case "0":

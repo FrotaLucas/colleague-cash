@@ -53,10 +53,11 @@ namespace ColleagueCash.Application
             }
         }
 
-        public void DisplayAllLoanByName(string name, string familyName)
+        public void DisplayAllLoansOfColleague(string name, string familyName)
         {
             var loans = _repositoryLoan.GetAllLoansByPerson(name, familyName)
-                .Where(loan => loan.Amount > 0);
+                .Where(loan => loan.Amount > 0)
+                .OrderByDescending(loan => loan.LoanDate);
 
 
             foreach (var loan in loans)
