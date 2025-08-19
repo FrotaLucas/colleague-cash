@@ -13,7 +13,7 @@ namespace ColleagueCash.Infrastructure
         public RepositoryLoan(string loanFile, string loandIdFile, IRepositoryBorrower repositoryBorrower)
         {
             this.loanFile = loanFile;
-            this.loanIdFile = loandIdFile;  
+            this.loanIdFile = loandIdFile;
             _repositoryBorrower = repositoryBorrower;
         }
 
@@ -22,7 +22,7 @@ namespace ColleagueCash.Infrastructure
             var storedBorrower = _repositoryBorrower.ExistedBorrower(borrower.Name, borrower.FamilyName);
             var date = DateTime.Now;
             string newRegistration;
-            int idRegistration = GetNextId();   
+            int idRegistration = GetNextId();
 
             if (storedBorrower != null)
             {
@@ -59,8 +59,8 @@ namespace ColleagueCash.Infrastructure
         public List<Loan> GetAllLoansByPerson(string name, string familyName)
         {
             var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
-             
-            var loans = new List<Loan>();   
+
+            var loans = new List<Loan>();
 
             if (borrower != null)
             {
@@ -69,11 +69,11 @@ namespace ColleagueCash.Infrastructure
                     .Select(line => line.Split(";"))
                     .Where(parts => int.Parse(parts[4]) == borrower.BorrowerId)
                     .Select(line => new Loan
-                      {
-                          Description = line[1],
-                          Amount = Decimal.Parse(line[2]),
-                          LoanDate = DateTime.Parse(line[3])
-                      })
+                    {
+                        Description = line[1],
+                        Amount = Decimal.Parse(line[2]),
+                        LoanDate = DateTime.Parse(line[3])
+                    })
                     .ToList();
             }
 
@@ -84,7 +84,8 @@ namespace ColleagueCash.Infrastructure
         {
             int id = 0;
 
-            if (File.Exists(loanIdFile)) {
+            if (File.Exists(loanIdFile))
+            {
 
                 id = int.Parse(File.ReadAllText(loanIdFile));
 
@@ -99,21 +100,22 @@ namespace ColleagueCash.Infrastructure
         {
             var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
 
-            if (borrower != null && borrower.BorrowerId != null) {
+            if (borrower != null && borrower.BorrowerId != null)
+            {
 
-                var allLines  = File.ReadAllLines(loanFile).ToList();
+                var allLines = File.ReadAllLines(loanFile).ToList();
 
                 var listOfLoan = allLines
                     .Skip(1)
                     .Select(line => line.Split(";"))
                     .Where(line => int.Parse(line[4]) == borrower.BorrowerId)
-                    .OrderBy(line => DateTime.Parse(line[3].ToString() )  )
+                    .OrderBy(line => DateTime.Parse(line[3].ToString()))
                     .Select(line => new Loan
                     {
                         LoanId = int.Parse(line[0]),
                         Description = line[1],
                         Amount = int.Parse(line[2]),
-                        LoanDate = DateTime.Parse(line[3].ToString() ),
+                        LoanDate = DateTime.Parse(line[3].ToString()),
                         BorrowerId = int.Parse(line[4]),
                     })
                     .ToList();
@@ -132,15 +134,15 @@ namespace ColleagueCash.Infrastructure
                         listOfLoan[i].Amount -= amount;
                         amount = 0;
                     }
-                    
+
                     i++;
                 }
-                
-                if(amount > 0)
+
+                if (amount > 0)
                     Console.WriteLine($"Warining: Payment amount exceeds the total loan");
 
                 List<string> updatedFile = new List<string> { allLines.First() };
-                foreach (var line in allLines.Skip(1)) 
+                foreach (var line in allLines.Skip(1))
                 {
                     var parts = line.Split(";");
 
@@ -155,8 +157,8 @@ namespace ColleagueCash.Infrastructure
 
                 }
 
-                
-                File.WriteAllLines(loanFile, updatedFile);  
+
+                File.WriteAllLines(loanFile, updatedFile);
 
             }
         }
