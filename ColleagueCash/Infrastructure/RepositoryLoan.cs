@@ -49,6 +49,7 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoans()
         {
+
             var loans = File.ReadAllLines(loanFile)
                 .Skip(1)
                 .Select(line => line.Split(";"))
@@ -83,6 +84,9 @@ namespace ColleagueCash.Infrastructure
                     })
                     .ToList();
             }
+            
+            if(loans.Count == 0)
+                Console.WriteLine("Colleague not registered yet.");
 
             return loans;
         }
