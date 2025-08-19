@@ -67,7 +67,7 @@ namespace ColleagueCash.Infrastructure
                 loans = File.ReadAllLines(loanFile)
                     .Skip(1)
                     .Select(line => line.Split(";"))
-                    .Where(parts => int.Parse(parts[3]) == borrower.BorrowerId)
+                    .Where(parts => int.Parse(parts[4]) == borrower.BorrowerId)
                     .Select(line => new Loan
                       {
                           Description = line[1],
