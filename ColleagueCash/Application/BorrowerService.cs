@@ -28,7 +28,7 @@ namespace ColleagueCash.Application
         //}
 
 
-        public void GetAllBorrowersByName()
+        public void GetAllBorrowersOrderedByName()
         {
             var borrowers = _repositoryBorrower.GetAllBorrowers()
                 .OrderBy(borrower => borrower.Name);
