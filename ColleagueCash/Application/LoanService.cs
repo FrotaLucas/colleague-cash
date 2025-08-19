@@ -12,7 +12,7 @@ namespace ColleagueCash.Application
         }
 
 
-        public void Execute()
+        public void DisplayAllLoans()
         {
             var list = _repositoryLoan.GetAllLoans()
                 .OrderBy( loan => loan.Description)
