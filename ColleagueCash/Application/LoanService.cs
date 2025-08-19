@@ -13,11 +13,7 @@ namespace ColleagueCash.Application
 
         public void RegisterNewLoan(string name, string familyName, decimal amount, string description)
         {
-            var loann = new Loan()
-            {
-
-            };
-            //_repositoryLoan.AddNewLoan(loan, borrower);
+            _repositoryLoan.AddNewLoan(name, familyName, amount, description);
         }
 
         public void ReduceLoan(string name, string familyName, decimal amount)
