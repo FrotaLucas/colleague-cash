@@ -63,7 +63,7 @@ namespace ColleagueCash.Infrastructure
             return loans;
         }
 
-        public List<Loan> GetAllLoansByColleague(string name, string familyName)
+        public List<Loan> GetAllLoansByBorrower(string name, string familyName)
         {
             var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
 

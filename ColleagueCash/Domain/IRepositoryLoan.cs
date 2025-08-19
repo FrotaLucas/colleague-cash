@@ -6,7 +6,7 @@
 
         public List<Loan> GetAllLoans();
 
-        public List<Loan> GetAllLoansByColleague(string name, string familyName);
+        public List<Loan> GetAllLoansByBorrower(string name, string familyName);
 
         public void ReduceLoan(string name, string familyName, decimal amount);
 
