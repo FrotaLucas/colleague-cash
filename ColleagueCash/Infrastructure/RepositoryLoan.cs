@@ -52,8 +52,6 @@ namespace ColleagueCash.Infrastructure
                 .ToList();
 
             return loans;
-
-
         }
 
         public List<Loan> GetAllLoansByPerson(string name, string familyName)
