@@ -55,6 +55,13 @@ namespace ColleagueCash.Infrastructure
 
         public List<Borrower> GetAllBorrowers()
         {
+            if (!File.Exists(borrowerFile))
+            {
+                Console.WriteLine("List of colleagues not created.");
+                return new List<Borrower>();
+            }
+
+
             var borrowers = File.ReadAllLines(borrowerFile)
                 .Skip(1)
                 .Select(line => line.Split(";"))
