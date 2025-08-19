@@ -28,11 +28,16 @@ namespace ColleagueCash.Application
         //}
 
 
-        public List<Borrower> GetAllBorrowersByName()
+        public void GetAllBorrowersByName()
         {
             var borrowers = _repositoryBorrower.GetAllBorrowers()
-                .OrderBy( borrower => borrower.Name ).ToList();
-            return borrowers;
+                .OrderBy(borrower => borrower.Name);
+
+
+            foreach (var borrower in borrowers)
+            {
+                Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
+            }
         }
 
     }
