@@ -164,6 +164,9 @@ namespace ColleagueCash.Infrastructure
                 File.WriteAllLines(loanFile, updatedFile);
 
             }
+
+            Console.WriteLine("Colleage not saved in the list");
+        
         }
 
 
