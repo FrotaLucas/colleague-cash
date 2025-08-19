@@ -2,7 +2,7 @@
 {
     public interface IRepositoryLoan
     {
-        public void AddNewLoan(Loan loan, Borrower borrower);
+        public void AddNewLoan(string name, string familyName, decimal amount, string description);
 
         public List<Loan> GetAllLoans();
 
