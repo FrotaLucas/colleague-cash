@@ -17,23 +17,29 @@ namespace ColleagueCash.Infrastructure
             _repositoryBorrower = repositoryBorrower;
         }
 
-        public void AddNewLoan(Loan loan, Borrower borrower)
+        public void AddNewLoan(string name, string familyName, decimal amount, string description)
         {
-            var storedBorrower = _repositoryBorrower.ExistedBorrower(borrower.Name, borrower.FamilyName);
+            var storedBorrower = _repositoryBorrower.ExistedBorrower(name, familyName);
             var date = DateTime.Now;
             string newRegistration;
-            int idRegistration = GetNextId();
+            int idRegistration = GetNextId();   
 
             if (storedBorrower != null)
             {
-                newRegistration = $"{idRegistration};{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
+                newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
                 return;
             }
 
+            var borrower = new Borrower
+            {
+                Name = name,
+                FamilyName = familyName,
+            };
+
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
 
-            newRegistration = $"{idRegistration};{loan.Description};{loan.Amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
+            newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
             File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
 
         }
