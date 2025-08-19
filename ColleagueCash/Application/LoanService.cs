@@ -25,5 +25,10 @@ namespace ColleagueCash.Application
         {
             _repositoryLoan.AddNewLoan(loan, borrower); 
         }
+
+        public void ReduceLoan(string name, string familyName, decimal amount)
+        {
+            _repositoryLoan.ReduceLoan(name, familyName, amount);
+        }
     }
 }
