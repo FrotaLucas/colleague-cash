@@ -1,36 +1,34 @@
-﻿using System.Net.Sockets;
-using ColleagueCash.Application;
+﻿using ColleagueCash.Application;
 using ColleagueCash.Domain;
 using ColleagueCash.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 class Program
 {
     public static void Main(String[] args)
     {
-        //COMO ESCONDER loanFile & borrowerFile DA APLICACAO? COLOCAR TUDO DENTRO DE UM app.config ??
+        string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string projectDirectory = Path.GetFullPath(Path.Combine(appDirectory, @"..\..\.."));
+
+        var config = new ConfigurationBuilder()
+            .SetBasePath(projectDirectory)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+        var fileSettings = config.GetSection("FileSettings").Get<FileSettings>();
+
+        string loanFile = Path.Combine(projectDirectory, fileSettings.LoanFile);
+        string borrowerFile = Path.Combine(projectDirectory, fileSettings.BorrowerFile);
+        string lastBorrowerIdFile = Path.Combine(projectDirectory, fileSettings.LastBorrowerIdFile);
+        string lastLoanIdFile = Path.Combine(projectDirectory, fileSettings.LastLoanIdFile);
 
 
-        string loanPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string loanFile = Path.Combine(loanPath, "WorkLoad\\loan-registration.csv");
-
-
-        string borrowerPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerFile = Path.Combine(borrowerPath, "WorkLoad\\borrower-registration.csv");
-
-        //last id borrower
-        string borrowerIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string borrowerSize = Path.Combine(borrowerIdPath, "WorkLoad\\last-borrowerId.txt");
-
-        //last id borrower
-        string loanIdPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
-        string loanSize = Path.Combine(loanIdPath, "WorkLoad\\last-loanId.txt");
-
-
-        IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, borrowerSize);
+        IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, lastBorrowerIdFile);
         var borrowerService = new BorrowerService(repositoryBorrower);
 
-        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, loanSize, repositoryBorrower);
+        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, lastLoanIdFile, repositoryBorrower);
         var loanService = new LoanService(repositoryLoan);
+
 
         while (true)
         {
@@ -73,8 +71,8 @@ class Program
                     {
                         Console.Write("Short description for the loan: ");
                         description = Console.ReadLine();
-                     
-                        loanService.RegisterNewLoan(amount, description, name, familyName );
+
+                        loanService.RegisterNewLoan(amount, description, name, familyName);
                         Console.WriteLine("Loan registered!");
                     }
 
@@ -119,7 +117,7 @@ class Program
                     name = fullName5[0];
                     familyName = fullName5[1];
 
-                    loanService.DisplayAllLoansOfColleague(name, familyName); 
+                    loanService.DisplayAllLoansOfColleague(name, familyName);
                     break;
 
                 case "6":
