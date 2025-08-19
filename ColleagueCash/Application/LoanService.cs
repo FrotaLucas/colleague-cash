@@ -11,6 +11,16 @@ namespace ColleagueCash.Application
             _repositoryLoan = repositoryLoan;
         }
 
+        public void RegisterNewLoan(Loan loan, Borrower borrower)
+        {
+            _repositoryLoan.AddNewLoan(loan, borrower);
+        }
+
+        public void ReduceLoan(string name, string familyName, decimal amount)
+        {
+            _repositoryLoan.ReduceLoan(name, familyName, amount);
+        }
+
         public List<Loan> DisplayAllLoansByDescription()
         {
             var list = _repositoryLoan.GetAllLoans()
@@ -33,14 +43,6 @@ namespace ColleagueCash.Application
             return list;
         }
 
-        public void RegisterNewLoan(Loan loan, Borrower borrower)
-        {
-            _repositoryLoan.AddNewLoan(loan, borrower); 
-        }
-
-        public void ReduceLoan(string name, string familyName, decimal amount)
-        {
-            _repositoryLoan.ReduceLoan(name, familyName, amount);
-        }
+      
     }
 }
