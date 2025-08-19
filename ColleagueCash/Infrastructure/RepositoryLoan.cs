@@ -109,7 +109,11 @@ namespace ColleagueCash.Infrastructure
                     
                     i++;
                 }
+                
+                if(amount > 0)
+                    Console.WriteLine($"Warinin: Payment amount exceeds the total loan");
 
+                
 
 
                 
