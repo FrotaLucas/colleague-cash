@@ -64,7 +64,6 @@ class Program
         Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
 
 
-        Console.WriteLine(cfg.DataFilesCSV.LoanPath);
 
         var loanService = host.Services.GetRequiredService<ILoanService>();
         var borrowerService = host.Services.GetRequiredService<IBorrowerService>();
