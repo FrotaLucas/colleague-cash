@@ -1,22 +1,33 @@
 ﻿using ColleagueCash.Domain;
 using ColleagueCash.Domain.Entities;
+using CollegueCashV2.Application.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Infrastructure
 {
     public class RepositoryLoan : IRepositoryLoan
     {
-        private readonly string loanFile;
+        private readonly AppConfig _appConfig;
 
-        private readonly string loanIdFile;
+
+        //private readonly string _appConfig.DataFilesCSV.LoanPath;
+
+        //private readonly string loanIdFile;
 
         public IRepositoryBorrower _repositoryBorrower;
 
-        public RepositoryLoan(string loanFile, string loandIdFile, IRepositoryBorrower repositoryBorrower)
+        public RepositoryLoan(IRepositoryBorrower repositoryBorrower, IOptions<AppConfig> appConfig)
         {
-            this.loanFile = loanFile;
-            this.loanIdFile = loandIdFile;
             _repositoryBorrower = repositoryBorrower;
+            _appConfig = appConfig.Value;
         }
+
+        //public RepositoryLoan(string loanFile, string loandIdFile, IRepositoryBorrower repositoryBorrower)
+        //{
+        //    this.loanFile = loanFile;
+        //    this.loanIdFile = loandIdFile;
+        //    _repositoryBorrower = repositoryBorrower;
+        //}
 
         public void AddNewLoan(decimal amount, string description, string name, string familyName)
         {
@@ -25,13 +36,13 @@ namespace ColleagueCash.Infrastructure
             string newRegistration;
             int idRegistration = GetNextId();
 
-            if (!File.Exists(loanFile))
-                File.WriteAllText(loanFile, "id;description;amount;date;idBorrower" + Environment.NewLine);
+            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
+                File.WriteAllText( _appConfig.DataFilesCSV.LoanPath , "id;description;amount;date;idBorrower" + Environment.NewLine);
 
             if (storedBorrower != null)
             {
                 newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
-                File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
+                File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
                 return;
             }
 
@@ -44,19 +55,20 @@ namespace ColleagueCash.Infrastructure
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
 
             newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
-            File.AppendAllText(loanFile, newRegistration + Environment.NewLine);
+            File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
 
         }
 
         public List<Loan> GetAllLoans()
         {
-            if (!File.Exists(loanFile) || !File.ReadAllLines(loanFile).Skip(1).Any())
+            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath) || !File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).Skip(1).Any())
             {
+
                 Console.WriteLine("There are no loans registered;");
                 return new List<Loan>();    
             }
 
-            var loans = File.ReadAllLines(loanFile)
+            var loans = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath)
                 .Skip(1)
                 .Select(line => line.Split(";"))
                 .Select(line => new Loan
@@ -78,7 +90,7 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null)
             {
-                loans = File.ReadAllLines(loanFile)
+                loans = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath)
                     .Skip(1)
                     .Select(line => line.Split(";"))
                     .Where(parts => int.Parse(parts[4]) == borrower.BorrowerId)
@@ -101,11 +113,11 @@ namespace ColleagueCash.Infrastructure
         {
             int id = 0;
 
-            if (File.Exists(loanIdFile))
-                id = int.Parse(File.ReadAllText(loanIdFile));
+            if (File.Exists(_appConfig.DataFilesCSV.LastLoanIdFile))
+                id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastLoanIdFile));
 
             int newId = id + 1;
-            File.WriteAllText(loanIdFile, newId.ToString());
+            File.WriteAllText(_appConfig.DataFilesCSV.LastLoanIdFile, newId.ToString());
             return newId;
         }
 
@@ -116,7 +128,7 @@ namespace ColleagueCash.Infrastructure
             if (borrower != null && borrower.BorrowerId != null)
             {
 
-                var allLines = File.ReadAllLines(loanFile).ToList();
+                var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).ToList();
 
                 var listOfLoan = allLines
                     .Skip(1)
@@ -171,7 +183,7 @@ namespace ColleagueCash.Infrastructure
                 }
 
 
-                File.WriteAllLines(loanFile, updatedFile);
+                File.WriteAllLines(_appConfig.DataFilesCSV.LoanPath, updatedFile);
 
             }
 
