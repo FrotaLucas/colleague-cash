@@ -21,7 +21,6 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName)
         {
-            Console.WriteLine($"Path Loan is: {_appConfig.DataFilesCSV.LoanPath}");
             _repositoryLoan.AddNewLoan(amount, description, name, familyName);
         }
 
