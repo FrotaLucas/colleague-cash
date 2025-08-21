@@ -1,34 +1,83 @@
-﻿//using ColleagueCash.Application;
-using ColleagueCash.Domain;
+﻿using ColleagueCash.Domain;
+using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Contracts.Services;
 using ColleagueCash.Infrastructure;
+using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 class Program
 {
     public static void Main(String[] args)
     {
-        string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        string projectDirectory = Path.GetFullPath(Path.Combine(appDirectory, @"..\..\.."));
+        //new code
+        var host = Host.CreateDefaultBuilder(args)
+         .ConfigureAppConfiguration((ctx, cfg) =>
+         {
+             cfg.SetBasePath(AppContext.BaseDirectory);
+             cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true);
+             cfg.AddJsonFile(Path.Combine("Application", $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
+             cfg.AddEnvironmentVariables();
+         })
+         .ConfigureServices((ctx, services) =>
+         {
+             Console.WriteLine(ctx.Configuration["DataFilesCSV:LoanPath"]);
 
-        var config = new ConfigurationBuilder()
-            .SetBasePath(projectDirectory)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
+             // ✨ Bind do appsettings inteiro
+             //opt1
+             //var appConfig = ctx.Configuration.Get<AppConfig>();
+             //services.AddSingleton(appConfig);
 
-        var fileSettings = config.GetSection("FileSettings").Get<FileSettings>();
-
-        string loanFile = Path.Combine(projectDirectory, fileSettings.LoanFile);
-        string borrowerFile = Path.Combine(projectDirectory, fileSettings.BorrowerFile);
-        string lastBorrowerIdFile = Path.Combine(projectDirectory, fileSettings.LastBorrowerIdFile);
-        string lastLoanIdFile = Path.Combine(projectDirectory, fileSettings.LastLoanIdFile);
+             //opt2
+             services.Configure<AppConfig>(ctx.Configuration);
 
 
-        IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, lastBorrowerIdFile);
-        var borrowerService = new BorrowerService(repositoryBorrower);
+             services.AddSingleton<ILoanService, LoanService>();
+             services.AddSingleton<IRepositoryLoan, RepositoryLoan>();
+             services.AddSingleton<IRepositoryBorrower, RepositoryBorrower>();
+             services.AddSingleton<IBorrowerService, BorrowerService>();
+             // … registre seus outros serviços depois e injete AppConfig no servico que precisar neles
+         })
+         .Build();
 
-        IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, lastLoanIdFile, repositoryBorrower);
-        var loanService = new LoanService(repositoryLoan);
+        //op1
+        //AppConfig cfg = host.Services.GetRequiredService<AppConfig>();
+
+
+        //op2
+        var cfg = host.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<AppConfig>>().Value;
+        Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
+
+
+        var loanService = host.Services.GetRequiredService<ILoanService>();
+        var borrowerService = host.Services.GetRequiredService<IBorrowerService>();
+
+
+        Console.WriteLine(cfg.DataFilesCSV.LoanPath);
+
+        //old code
+        //string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //string projectDirectory = Path.GetFullPath(Path.Combine(appDirectory, @"..\..\.."));
+
+        //var config = new ConfigurationBuilder()
+        //    .SetBasePath(projectDirectory)
+        //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        //    .Build();
+
+        //var fileSettings = config.GetSection("FileSettings").Get<FileSettings>();
+
+        //string loanFile = Path.Combine(projectDirectory, fileSettings.LoanFile);
+        //string borrowerFile = Path.Combine(projectDirectory, fileSettings.BorrowerFile);
+        //string lastBorrowerIdFile = Path.Combine(projectDirectory, fileSettings.LastBorrowerIdFile);
+        //string lastLoanIdFile = Path.Combine(projectDirectory, fileSettings.LastLoanIdFile);
+
+
+        //IRepositoryBorrower repositoryBorrower = new RepositoryBorrower(borrowerFile, lastBorrowerIdFile);
+        //var borrowerService = new BorrowerService(repositoryBorrower);
+
+        //IRepositoryLoan repositoryLoan = new RepositoryLoan(loanFile, lastLoanIdFile, repositoryBorrower);
+        //var loanService = new LoanService(repositoryLoan);
 
 
         while (true)
