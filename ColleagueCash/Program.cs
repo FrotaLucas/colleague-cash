@@ -49,7 +49,7 @@ class Program
 
              services.AddSingleton<ILoanService, LoanService>();
              services.AddSingleton<ILoanRepository, RepositoryLoan>();
-             services.AddSingleton<IBorrowerRepository, RepositoryBorrower>();
+             services.AddSingleton<IBorrowerRepository, BorrowerRepository>();
              services.AddSingleton<IBorrowerService, BorrowerService>();
              // … registre seus outros serviços depois e injete AppConfig no servico que precisar neles
          })

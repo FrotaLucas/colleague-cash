@@ -5,11 +5,11 @@ using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Infrastructure
 {
-    public class RepositoryBorrower : IBorrowerRepository
+    public class BorrowerRepository : IBorrowerRepository
     {
         private readonly AppConfig _appConfig;
 
-        public RepositoryBorrower(IOptions<AppConfig> appConfig)
+        public BorrowerRepository(IOptions<AppConfig> appConfig)
         {
             _appConfig = appConfig.Value;
         }
