@@ -1,4 +1,6 @@
-﻿namespace ColleagueCash.Domain
+﻿using ColleagueCash.Domain.Entities;
+
+namespace ColleagueCash.Domain
 {
     public interface IRepositoryBorrower
     {

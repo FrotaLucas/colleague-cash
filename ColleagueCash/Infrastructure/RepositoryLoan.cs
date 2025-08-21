@@ -1,4 +1,5 @@
 ﻿using ColleagueCash.Domain;
+using ColleagueCash.Domain.Entities;
 
 namespace ColleagueCash.Infrastructure
 {
