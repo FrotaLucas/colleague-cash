@@ -1,19 +1,28 @@
 ﻿using ColleagueCash.Domain;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
+using CollegueCashV2.Application.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
     public class LoanService : ILoanService
     {
+
+        private readonly AppConfig _appConfig;
+
+        //public LoanService(AppConfig appConfig) => _appConfig = appConfig;
+
         private IRepositoryLoan _repositoryLoan;
 
-        public LoanService(IRepositoryLoan repositoryLoan)
+        public LoanService(IRepositoryLoan repositoryLoan, IOptions<AppConfig> appConfig)
         {
             _repositoryLoan = repositoryLoan;
+            _appConfig = appConfig.Value;
         }
 
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName)
         {
+            Console.WriteLine($"Path Loan is: {_appConfig.DataFilesCSV.LoanPath}");
             _repositoryLoan.AddNewLoan(amount, description, name, familyName);
         }
 
