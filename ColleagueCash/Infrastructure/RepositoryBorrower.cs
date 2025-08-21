@@ -1,32 +1,39 @@
 ﻿using ColleagueCash.Domain;
 using ColleagueCash.Domain.Entities;
+using CollegueCashV2.Application.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Infrastructure
 {
     public class RepositoryBorrower : IRepositoryBorrower
     {
+        private readonly AppConfig _appConfig;
 
-        private readonly string borrowerFile;
-
-        private readonly string borrowerIdFile;
-
-        public RepositoryBorrower(string fileName, string lastBorrowerId)
+        public RepositoryBorrower(IOptions<AppConfig> appConfig)
         {
-            this.borrowerFile = fileName;
-            this.borrowerIdFile = lastBorrowerId;
+            _appConfig = appConfig.Value;
         }
+
+        //private readonly string borrowerFile;
+
+        //private readonly string borrowerIdFile;
+
+        //public RepositoryBorrower(string fileName, string lastBorrowerId)
+        //{
+        //    this.borrowerFile = fileName;
+        //    this.borrowerIdFile = lastBorrowerId;
+        //}
 
         public int GetNextId()
         {
             int id = 0;
 
-            if (File.Exists(borrowerIdFile))
-            {
-                id = int.Parse(File.ReadAllText(borrowerIdFile));
-            }
+            if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
+                id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile));
+           
 
             int newId = id + 1;
-            File.WriteAllText(borrowerIdFile, newId.ToString());
+            File.WriteAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile, newId.ToString());
             return newId;
         }
 
@@ -34,9 +41,9 @@ namespace ColleagueCash.Infrastructure
         {
             int borrowerId = GetNextId();
 
-            if (!File.Exists(borrowerFile))
+            if (!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
             {
-                File.WriteAllText(borrowerFile, "id;name;familyName;cellphone" + Environment.NewLine);
+                File.WriteAllText(_appConfig.DataFilesCSV.BorrowerPath, "id;name;familyName;cellphone" + Environment.NewLine);
             }
 
             var newBorrower = new Borrower()
@@ -49,21 +56,21 @@ namespace ColleagueCash.Infrastructure
 
             string newRegistration = $"{borrowerId};{borrower.Name};{borrower.FamilyName};{borrower.Cellphone}";
 
-            File.AppendAllText(borrowerFile, newRegistration + Environment.NewLine);
+            File.AppendAllText(_appConfig.DataFilesCSV.BorrowerPath, newRegistration + Environment.NewLine);
 
             return newBorrower;
         }
 
         public List<Borrower> GetAllBorrowers()
         {
-            if (!File.Exists(borrowerFile))
+            if (!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
             {
                 Console.WriteLine("List of colleagues not created.");
                 return new List<Borrower>();
             }
 
 
-            var borrowers = File.ReadAllLines(borrowerFile)
+            var borrowers = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath)
                 .Skip(1)
                 .Select(line => line.Split(";"))
                 .Select(line => new Borrower
@@ -79,10 +86,10 @@ namespace ColleagueCash.Infrastructure
 
         public Borrower ExistedBorrower(string name, string familyName)
         {
-            if(!File.Exists(borrowerFile))
-                File.WriteAllText(borrowerFile, "id;name;familyName;cellphone" + Environment.NewLine);
+            if(!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
+                File.WriteAllText(_appConfig.DataFilesCSV.BorrowerPath, "id;name;familyName;cellphone" + Environment.NewLine);
 
-            var lines = File.ReadAllLines(borrowerFile).Skip(1);
+            var lines = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath).Skip(1);
 
 
             if (!lines.Any())
