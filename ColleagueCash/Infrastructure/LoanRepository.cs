@@ -165,14 +165,10 @@ namespace ColleagueCash.Infrastructure
 
 
                     updatedFile.Add(string.Join(";", parts));
-
                 }
 
-
                 File.WriteAllLines(_appConfig.DataFilesCSV.LoanPath, updatedFile);
-
             }
-
             Console.WriteLine("Colleage not registered yet.");
         }
     }
