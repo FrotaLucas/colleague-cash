@@ -9,11 +9,6 @@ namespace ColleagueCash.Infrastructure
     {
         private readonly AppConfig _appConfig;
 
-
-        //private readonly string _appConfig.DataFilesCSV.LoanPath;
-
-        //private readonly string loanIdFile;
-
         public IRepositoryBorrower _repositoryBorrower;
 
         public RepositoryLoan(IRepositoryBorrower repositoryBorrower, IOptions<AppConfig> appConfig)
@@ -21,13 +16,6 @@ namespace ColleagueCash.Infrastructure
             _repositoryBorrower = repositoryBorrower;
             _appConfig = appConfig.Value;
         }
-
-        //public RepositoryLoan(string loanFile, string loandIdFile, IRepositoryBorrower repositoryBorrower)
-        //{
-        //    this.loanFile = loanFile;
-        //    this.loanIdFile = loandIdFile;
-        //    _repositoryBorrower = repositoryBorrower;
-        //}
 
         public void AddNewLoan(decimal amount, string description, string name, string familyName)
         {
@@ -37,7 +25,7 @@ namespace ColleagueCash.Infrastructure
             int idRegistration = GetNextId();
 
             if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
-                File.WriteAllText( _appConfig.DataFilesCSV.LoanPath , "id;description;amount;date;idBorrower" + Environment.NewLine);
+                File.WriteAllText(_appConfig.DataFilesCSV.LoanPath, "id;description;amount;date;idBorrower" + Environment.NewLine);
 
             if (storedBorrower != null)
             {
@@ -63,9 +51,8 @@ namespace ColleagueCash.Infrastructure
         {
             if (!File.Exists(_appConfig.DataFilesCSV.LoanPath) || !File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).Skip(1).Any())
             {
-
                 Console.WriteLine("There are no loans registered;");
-                return new List<Loan>();    
+                return new List<Loan>();
             }
 
             var loans = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath)
@@ -102,8 +89,8 @@ namespace ColleagueCash.Infrastructure
                     })
                     .ToList();
             }
-            
-            if(loans.Count == 0)
+
+            if (loans.Count == 0)
                 Console.WriteLine("Colleague not registered yet.");
 
             return loans;
@@ -127,7 +114,6 @@ namespace ColleagueCash.Infrastructure
 
             if (borrower != null && borrower.BorrowerId != null)
             {
-
                 var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).ToList();
 
                 var listOfLoan = allLines
@@ -188,9 +174,6 @@ namespace ColleagueCash.Infrastructure
             }
 
             Console.WriteLine("Colleage not registered yet.");
-        
         }
-
-
     }
 }
