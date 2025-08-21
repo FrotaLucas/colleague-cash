@@ -12,9 +12,9 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         //public LoanService(AppConfig appConfig) => _appConfig = appConfig;
 
-        private IRepositoryLoan _repositoryLoan;
+        private ILoanRepository _repositoryLoan;
 
-        public LoanService(IRepositoryLoan repositoryLoan, IOptions<AppConfig> appConfig)
+        public LoanService(ILoanRepository repositoryLoan, IOptions<AppConfig> appConfig)
         {
             _repositoryLoan = repositoryLoan;
             _appConfig = appConfig.Value;

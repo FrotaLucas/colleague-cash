@@ -2,7 +2,7 @@
 
 namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 {
-    public interface IRepositoryLoan
+    public interface ILoanRepository
     {
         public void AddNewLoan(decimal amount, string description, string name, string familyName);
 
