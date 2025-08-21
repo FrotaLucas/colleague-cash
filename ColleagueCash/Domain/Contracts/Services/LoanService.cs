@@ -1,8 +1,9 @@
 ﻿using ColleagueCash.Domain;
+using ColleagueCash.Domain.Contracts.Interfaces.IService;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
-    public class LoanService
+    public class LoanService : ILoanService
     {
         private IRepositoryLoan _repositoryLoan;
 
