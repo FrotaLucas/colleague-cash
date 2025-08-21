@@ -2,5 +2,8 @@
 {
     public interface IBorrowerService
     {
+        public void GetAllBorrowersOrderedByName();
     }
+
+
 }

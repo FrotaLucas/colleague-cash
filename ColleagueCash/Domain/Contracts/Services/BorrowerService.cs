@@ -1,8 +1,9 @@
 ﻿using ColleagueCash.Domain;
+using ColleagueCash.Domain.Contracts.Interfaces.IService;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
-    public class BorrowerService
+    public class BorrowerService : IBorrowerService
     {
 
         public readonly IRepositoryBorrower _repositoryBorrower;
