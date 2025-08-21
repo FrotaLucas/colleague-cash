@@ -1,6 +1,6 @@
 ﻿using ColleagueCash.Domain;
 
-namespace ColleagueCash.Application
+namespace ColleagueCash.Domain.Contracts.Services
 {
     public class LoanService
     {
