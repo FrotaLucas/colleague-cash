@@ -11,6 +11,8 @@ class Program
 {
     public static void Main(String[] args)
     {
+        string projectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\")  );
+
         //new code
         var host = Host.CreateDefaultBuilder(args)
          .ConfigureAppConfiguration((ctx, cfg) =>
@@ -30,8 +32,20 @@ class Program
              //services.AddSingleton(appConfig);
 
              //opt2
-             services.Configure<AppConfig>(ctx.Configuration);
+             //services.Configure<AppConfig>(ctx.Configuration);
 
+             //op3
+             // Bind + ajustar caminhos absolutos
+             services.Configure<AppConfig>(options =>
+             {
+                 ctx.Configuration.Bind(options);
+
+                 
+                 options.DataFilesCSV.LoanPath = Path.Combine(projectDirectory, options.DataFilesCSV.LoanPath);
+                 options.DataFilesCSV.BorrowerPath = Path.Combine(projectDirectory, options.DataFilesCSV.BorrowerPath);
+                 options.DataFilesCSV.LastBorrowerIdFile = Path.Combine(projectDirectory, options.DataFilesCSV.LastBorrowerIdFile);
+                 options.DataFilesCSV.LastLoanIdFile = Path.Combine(projectDirectory, options.DataFilesCSV.LastLoanIdFile);
+             });
 
              services.AddSingleton<ILoanService, LoanService>();
              services.AddSingleton<IRepositoryLoan, RepositoryLoan>();
@@ -50,11 +64,10 @@ class Program
         Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
 
 
+        Console.WriteLine(cfg.DataFilesCSV.LoanPath);
+
         var loanService = host.Services.GetRequiredService<ILoanService>();
         var borrowerService = host.Services.GetRequiredService<IBorrowerService>();
-
-
-        Console.WriteLine(cfg.DataFilesCSV.LoanPath);
 
         //old code
         //string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
