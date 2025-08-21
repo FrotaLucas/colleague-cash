@@ -1,5 +1,4 @@
-﻿using ColleagueCash.Domain;
-using ColleagueCash.Domain.Contracts.Interfaces.IService;
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Options;
 
