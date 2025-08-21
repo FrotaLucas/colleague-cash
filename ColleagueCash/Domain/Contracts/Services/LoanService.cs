@@ -81,14 +81,5 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         }
 
-        //DESNECESSARIO
-        //public List<Loan> DisplayAllLoansByDescription()
-        //{
-        //    var list = _repositoryLoan.GetAllLoans()
-        //        .OrderBy( loan => loan.Description)
-        //        .ToList();  
-        //    return list;
-        //}
-
     }
 }
