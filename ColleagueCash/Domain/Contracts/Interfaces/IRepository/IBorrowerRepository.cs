@@ -2,7 +2,7 @@
 
 namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 {
-    public interface IRepositoryBorrower
+    public interface IBorrowerRepository
     {
         public Borrower AddNewBorrower(Borrower borrower);
 

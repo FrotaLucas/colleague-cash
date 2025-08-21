@@ -10,9 +10,9 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         private readonly AppConfig _appConfig;
 
-        public readonly IRepositoryBorrower _repositoryBorrower;
+        public readonly IBorrowerRepository _repositoryBorrower;
 
-        public BorrowerService(IRepositoryBorrower repositoryBorrower, IOptions<AppConfig> appConfig)
+        public BorrowerService(IBorrowerRepository repositoryBorrower, IOptions<AppConfig> appConfig)
         {
             _repositoryBorrower = repositoryBorrower;
             _appConfig = appConfig.Value;

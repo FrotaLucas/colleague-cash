@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Infrastructure
 {
-    public class RepositoryBorrower : IRepositoryBorrower
+    public class RepositoryBorrower : IBorrowerRepository
     {
         private readonly AppConfig _appConfig;
 

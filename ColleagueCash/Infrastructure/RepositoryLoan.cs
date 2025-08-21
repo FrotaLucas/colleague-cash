@@ -9,9 +9,9 @@ namespace ColleagueCash.Infrastructure
     {
         private readonly AppConfig _appConfig;
 
-        public IRepositoryBorrower _repositoryBorrower;
+        public IBorrowerRepository _repositoryBorrower;
 
-        public RepositoryLoan(IRepositoryBorrower repositoryBorrower, IOptions<AppConfig> appConfig)
+        public RepositoryLoan(IBorrowerRepository repositoryBorrower, IOptions<AppConfig> appConfig)
         {
             _repositoryBorrower = repositoryBorrower;
             _appConfig = appConfig.Value;
