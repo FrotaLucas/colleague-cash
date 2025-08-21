@@ -1,16 +1,21 @@
 ﻿using ColleagueCash.Domain;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
+using CollegueCashV2.Application.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
     public class BorrowerService : IBorrowerService
     {
 
+        private readonly AppConfig _appConfig;
+
         public readonly IRepositoryBorrower _repositoryBorrower;
 
-        public BorrowerService(IRepositoryBorrower repositoryBorrower)
+        public BorrowerService(IRepositoryBorrower repositoryBorrower, IOptions<AppConfig> appConfig)
         {
             _repositoryBorrower = repositoryBorrower;
+            _appConfig = appConfig.Value;
         }
 
 
