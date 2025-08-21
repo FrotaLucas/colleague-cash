@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Application\" />
     <Folder Include="Domain\Contracts\Interfaces\IService\" />
+    <Folder Include="Domain\Contracts\Interfaces\IRepository\" />
     <Folder Include="WorkLoad\" />
   </ItemGroup>
 
