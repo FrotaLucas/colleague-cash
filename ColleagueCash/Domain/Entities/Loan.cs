@@ -1,4 +1,4 @@
-﻿namespace ColleagueCash.Domain
+﻿namespace ColleagueCash.Domain.Entities
 {
     public class Loan
     {
