@@ -1,6 +1,6 @@
 ﻿using ColleagueCash.Domain.Entities;
 
-namespace ColleagueCash.Domain
+namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 {
     public interface IRepositoryBorrower
     {

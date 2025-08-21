@@ -1,4 +1,4 @@
-﻿using ColleagueCash.Domain;
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Entities;
 using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Options;
