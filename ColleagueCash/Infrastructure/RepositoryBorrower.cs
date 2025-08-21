@@ -14,16 +14,6 @@ namespace ColleagueCash.Infrastructure
             _appConfig = appConfig.Value;
         }
 
-        //private readonly string borrowerFile;
-
-        //private readonly string borrowerIdFile;
-
-        //public RepositoryBorrower(string fileName, string lastBorrowerId)
-        //{
-        //    this.borrowerFile = fileName;
-        //    this.borrowerIdFile = lastBorrowerId;
-        //}
-
         public int GetNextId()
         {
             int id = 0;
@@ -42,9 +32,7 @@ namespace ColleagueCash.Infrastructure
             int borrowerId = GetNextId();
 
             if (!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
-            {
                 File.WriteAllText(_appConfig.DataFilesCSV.BorrowerPath, "id;name;familyName;cellphone" + Environment.NewLine);
-            }
 
             var newBorrower = new Borrower()
             {
@@ -109,7 +97,6 @@ namespace ColleagueCash.Infrastructure
                 .FirstOrDefault();
 
             return borrower;
-
         }
     }
 }
