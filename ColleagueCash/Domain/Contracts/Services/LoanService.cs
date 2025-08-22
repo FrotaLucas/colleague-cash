@@ -48,7 +48,37 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void ReduceLoan(string name, string familyName, decimal amount)
         {
-            _repositoryLoan.ReduceLoan(name, familyName, amount);
+            var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+
+            if (borrower != null && borrower.BorrowerId != null)
+            {
+                var listOfLoan = _repositoryLoan.GetAllLoansByBorrowerId(borrower.BorrowerId);
+
+                int i = 0;
+                while (amount > 0 && i < listOfLoan.Count)
+                {
+                    if (amount >= listOfLoan[i].Amount)
+                    {
+                        amount -= listOfLoan[i].Amount;
+                        listOfLoan[i].Amount = 0;
+                    }
+
+                    else
+                    {
+                        listOfLoan[i].Amount -= amount;
+                        amount = 0;
+                    }
+                    i++;
+                }
+
+                if (amount > 0)
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan");
+
+                _repositoryLoan.ReduceLoan(listOfLoan);
+            }
+
+            else
+                Console.WriteLine("Colleage not registered yet.");
         }
 
         public void DisplayAllLoansByAmount()
@@ -98,7 +128,6 @@ namespace ColleagueCash.Domain.Contracts.Services
                     $"Date of registration: {loan.LoanDate}"
                 );
             }
-
         }
 
     }

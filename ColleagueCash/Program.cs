@@ -102,13 +102,13 @@ class Program
         while (true)
         {
             Console.WriteLine("\n=== Loan Tracker ===");
-            Console.WriteLine("1 - Register new Loan");
-            Console.WriteLine("2 - Settling a colleague debt");
-            Console.WriteLine("3 - List all debts ordered by amount"); //By amount
-            Console.WriteLine("4 - List all debts ordered by date");
-            Console.WriteLine("5 - List all debts of a colleague");
-            Console.WriteLine("6 - List all your colleagues");
-            Console.WriteLine("0 - Exit");
+            Console.WriteLine("1 - Register new Loan\n");
+            Console.WriteLine("2 - Settling a colleague debt\n");
+            Console.WriteLine("3 - List all debts ordered by amount\n"); //By amount
+            Console.WriteLine("4 - List all debts ordered by date\n");
+            Console.WriteLine("5 - List all debts of a colleague\n");
+            Console.WriteLine("6 - List all your colleagues\n");
+            Console.WriteLine("0 - Exit\n");
             Console.Write("Your option: ");
 
             var choice = Console.ReadLine();

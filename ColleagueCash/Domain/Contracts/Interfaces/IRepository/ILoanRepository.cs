@@ -10,8 +10,12 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 
         public List<Loan> GetAllLoansByBorrower(string name, string familyName);
 
-        public void ReduceLoan(string name, string familyName, decimal amount);
+        public List<Loan> GetAllLoansByBorrowerId(int id);
+
+        public void ReduceLoan(List<Loan> loans);
 
         public int GetNextId();
+
+        public void UpdateLoanFile(List<Loan> loans);
     }
 }
