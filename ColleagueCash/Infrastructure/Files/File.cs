@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ColleagueCash.Domain.Contracts.Interfaces.IFiles;
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IFiles;
 using ColleagueCash.Domain.Entities;
 
 namespace ColleagueCash.Infrastructure.Files
