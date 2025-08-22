@@ -11,49 +11,57 @@ class Program
 {
     public static void Main(String[] args)
     {
-        string projectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\")  );
+        string baseDir = AppContext.BaseDirectory;
+
+        // sobe 3 níveis até a raiz do projeto
+        string projectDirectory = Directory.GetParent(baseDir)!.Parent!.Parent!.Parent!.FullName;
 
         //new code
         var host = Host.CreateDefaultBuilder(args)
-         .ConfigureAppConfiguration((ctx, cfg) =>
-         {
-             cfg.SetBasePath(AppContext.BaseDirectory);
-             cfg.AddJsonFile(Path.Combine("Application","appsettings.json"), optional: true, reloadOnChange: true);
-             cfg.AddJsonFile(Path.Combine("Application", $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json"), optional: true, reloadOnChange: true);
-             cfg.AddEnvironmentVariables();
-         })
-         .ConfigureServices((ctx, services) =>
-         {
-             Console.WriteLine(ctx.Configuration["DataFilesCSV:LoanPath"]);
+            .ConfigureAppConfiguration((ctx, cfg) =>
+            {
+                cfg.SetBasePath(AppContext.BaseDirectory);
+                cfg.AddJsonFile(Path.Combine("Application", "appsettings.json"), optional: true, reloadOnChange: true);
+                cfg.AddJsonFile(
+                    Path.Combine("Application", $"appsettings.{ctx.HostingEnvironment.EnvironmentName}.json"),
+                    optional: true, reloadOnChange: true);
+                cfg.AddEnvironmentVariables();
+            })
+            .ConfigureServices((ctx, services) =>
+            {
+                Console.WriteLine(ctx.Configuration["DataFilesCSV:LoanPath"]);
 
-             // ✨ Bind do appsettings inteiro
-             //opt1
-             //var appConfig = ctx.Configuration.Get<AppConfig>();
-             //services.AddSingleton(appConfig);
+                // ✨ Bind do appsettings inteiro
+                //opt1
+                //var appConfig = ctx.Configuration.Get<AppConfig>();
+                //services.AddSingleton(appConfig);
 
-             //opt2
-             //services.Configure<AppConfig>(ctx.Configuration);
+                //opt2
+                //services.Configure<AppConfig>(ctx.Configuration);
 
-             //op3
-             // Bind + ajustar caminhos absolutos
-             services.Configure<AppConfig>(options =>
-             {
-                 ctx.Configuration.Bind(options);
+                //op3
+                // Bind + ajustar caminhos absolutos
+                services.Configure<AppConfig>(options =>
+                {
+                    ctx.Configuration.Bind(options);
 
-                 
-                 options.DataFilesCSV.LoanPath = Path.Combine(projectDirectory, options.DataFilesCSV.LoanPath);
-                 options.DataFilesCSV.BorrowerPath = Path.Combine(projectDirectory, options.DataFilesCSV.BorrowerPath);
-                 options.DataFilesCSV.LastBorrowerIdFile = Path.Combine(projectDirectory, options.DataFilesCSV.LastBorrowerIdFile);
-                 options.DataFilesCSV.LastLoanIdFile = Path.Combine(projectDirectory, options.DataFilesCSV.LastLoanIdFile);
-             });
 
-             services.AddSingleton<ILoanService, LoanService>();
-             services.AddSingleton<ILoanRepository, LoanRepository>();
-             services.AddSingleton<IBorrowerRepository, BorrowerRepository>();
-             services.AddSingleton<IBorrowerService, BorrowerService>();
-             // … registre seus outros serviços depois e injete AppConfig no servico que precisar neles
-         })
-         .Build();
+                    options.DataFilesCSV.LoanPath = Path.Combine(projectDirectory, options.DataFilesCSV.LoanPath);
+                    options.DataFilesCSV.BorrowerPath =
+                        Path.Combine(projectDirectory, options.DataFilesCSV.BorrowerPath);
+                    options.DataFilesCSV.LastBorrowerIdFile =
+                        Path.Combine(projectDirectory, options.DataFilesCSV.LastBorrowerIdFile);
+                    options.DataFilesCSV.LastLoanIdFile =
+                        Path.Combine(projectDirectory, options.DataFilesCSV.LastLoanIdFile);
+                });
+
+                services.AddSingleton<ILoanService, LoanService>();
+                services.AddSingleton<ILoanRepository, LoanRepository>();
+                services.AddSingleton<IBorrowerRepository, BorrowerRepository>();
+                services.AddSingleton<IBorrowerService, BorrowerService>();
+                // … registre seus outros serviços depois e injete AppConfig no servico que precisar neles
+            })
+            .Build();
 
         //op1
         //AppConfig cfg = host.Services.GetRequiredService<AppConfig>();
@@ -62,7 +70,6 @@ class Program
         //op2
         var cfg = host.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<AppConfig>>().Value;
         Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
-
 
 
         var loanService = host.Services.GetRequiredService<ILoanService>();
@@ -142,6 +149,7 @@ class Program
                     {
                         Console.WriteLine("Invalid Amount");
                     }
+
                     break;
 
                 case "2":
@@ -162,6 +170,7 @@ class Program
                     {
                         Console.WriteLine("Invalid Amount");
                     }
+
                     break;
 
                 case "3":
@@ -194,6 +203,5 @@ class Program
                     break;
             }
         }
-
     }
 }

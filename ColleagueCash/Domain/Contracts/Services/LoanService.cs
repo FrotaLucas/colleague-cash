@@ -8,57 +8,41 @@ namespace ColleagueCash.Domain.Contracts.Services
 {
     public class LoanService : ILoanService
     {
-
-        private IBorrowerRepository _repositoryBorrower;
-
         private readonly AppConfig _appConfig;
-
-        //public LoanService(AppConfig appConfig) => _appConfig = appConfig;
-
         private ILoanRepository _repositoryLoan;
+        private IBorrowerRepository _repositoryBorrower;
+        private IBorrowerService _borrowerService;
+        
 
-        public LoanService(ILoanRepository repositoryLoan, IOptions<AppConfig> appConfig, IBorrowerRepository repositoryBorrower)
+        public LoanService(
+            IOptions<AppConfig> appConfig, 
+            ILoanRepository repositoryLoan, 
+            IBorrowerRepository repositoryBorrower,
+            IBorrowerService borrowerService)
         {
-            _repositoryLoan = repositoryLoan;
             _appConfig = appConfig.Value;
+            _repositoryLoan = repositoryLoan;
             _repositoryBorrower = repositoryBorrower;
+            _borrowerService = borrowerService;
         }
-
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName)
         {
-            //old 
-            //_repositoryLoan.AddNewLoan(amount, description, name, familyName);
-
-
-            //code 
-            var storedBorrower = _repositoryBorrower.ExistedBorrower(name, familyName);
-            var date = DateTime.Now;
-            string newRegistration;
+            Borrower storedBorrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+            
             int idRegistration = _repositoryLoan.GetNextId();
 
             if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
                 File.WriteAllText(_appConfig.DataFilesCSV.LoanPath, "id;description;amount;date;idBorrower" + Environment.NewLine);
-
-            if (storedBorrower != null)
+            
+            if (storedBorrower is null)
             {
-                newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
-                File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
-                return;
+                storedBorrower = new Borrower();
+                int borrowerId = _borrowerService.AddNewBorrower(name, familyName);
+                storedBorrower.BorrowerId = borrowerId;
             }
-
-            var borrower = new Borrower
-            {
-                Name = name,
-                FamilyName = familyName,
-            };
-
-            //ToDO
-            //try catch // desfazer o que vc fez no lista de arquivo 
-            Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
-
-            newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
-            File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
-
+            
+            string newRegistration = $"{idRegistration};{description};{amount};{DateTime.Now:yyyy-MM-dd};{storedBorrower.BorrowerId}";
+            _repositoryLoan.AddNewLoan(newRegistration);
         }
 
         public void ReduceLoan(string name, string familyName, decimal amount)

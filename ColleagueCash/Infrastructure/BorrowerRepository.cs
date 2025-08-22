@@ -72,7 +72,7 @@ namespace ColleagueCash.Infrastructure
             return borrowers;
         }
 
-        public Borrower ExistedBorrower(string name, string familyName)
+        public Borrower GetBorrowerByEmail(string name, string familyName)
         {
             if(!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
                 File.WriteAllText(_appConfig.DataFilesCSV.BorrowerPath, "id;name;familyName;cellphone" + Environment.NewLine);

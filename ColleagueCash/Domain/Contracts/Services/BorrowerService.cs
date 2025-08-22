@@ -1,5 +1,6 @@
 ﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
+using ColleagueCash.Domain.Entities;
 using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -17,12 +18,18 @@ namespace ColleagueCash.Domain.Contracts.Services
             _repositoryBorrower = repositoryBorrower;
             _appConfig = appConfig.Value;
         }
+        
+        public int AddNewBorrower(string name, string familyName)
+        {
+            Borrower newBorrower = new Borrower
+            {
+                Name = name,
+                FamilyName = familyName,
+            };
+            Borrower borrower = _repositoryBorrower.AddNewBorrower(newBorrower);
 
-
-        //public void AddNewBorrower(Borrower borrower)
-        //{
-        //    _repositoryBorrower.AddNewBorrower(borrower);
-        //}
+            return borrower.BorrowerId;
+        }
 
         //public List<Borrower> GetAllBorrowersByFamilyName() {
 
@@ -32,7 +39,6 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         //    return borrowers;
         //}
-
 
         public void GetAllBorrowersOrderedByName()
         {
@@ -45,6 +51,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
             }
         }
+
 
     }
 }

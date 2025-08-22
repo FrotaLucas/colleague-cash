@@ -8,7 +8,7 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 
         public List<Borrower> GetAllBorrowers();
 
-        public Borrower ExistedBorrower(string Name, string FamilyName);   
+        public Borrower GetBorrowerByEmail(string name, string familyName);   
 
         public int GetNextId();
     }

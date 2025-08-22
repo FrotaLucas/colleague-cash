@@ -17,36 +17,17 @@ namespace ColleagueCash.Infrastructure
             _appConfig = appConfig.Value;
         }
 
-        public void AddNewLoan(decimal amount, string description, string name, string familyName)
+        public void AddNewLoan(string newRegistration)
         {
-            var storedBorrower = _repositoryBorrower.ExistedBorrower(name, familyName);
-            var date = DateTime.Now;
-            string newRegistration;
-            int idRegistration = GetNextId();
-
-            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
-                File.WriteAllText(_appConfig.DataFilesCSV.LoanPath, "id;description;amount;date;idBorrower" + Environment.NewLine);
-
-            if (storedBorrower != null)
+            try
             {
-                newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{storedBorrower.BorrowerId}";
                 File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
-                return;
             }
-
-            var borrower = new Borrower
+            catch (Exception e)
             {
-                Name = name,
-                FamilyName = familyName,
-            };
-
-            //ToDO
-            //try catch // desfazer o que vc fez no lista de arquivo 
-            Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
-
-            newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
-            File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
-
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public List<Loan> GetAllLoans()
@@ -73,7 +54,7 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoansByBorrower(string name, string familyName)
         {
-            var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
+            var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
 
             var loans = new List<Loan>();
 
@@ -112,7 +93,7 @@ namespace ColleagueCash.Infrastructure
 
         public void ReduceLoan(string name, string familyName, decimal amount)
         {
-            var borrower = _repositoryBorrower.ExistedBorrower(name, familyName);
+            var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
 
             if (borrower != null && borrower.BorrowerId != null)
             {

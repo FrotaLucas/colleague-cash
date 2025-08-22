@@ -4,7 +4,7 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 {
     public interface ILoanRepository
     {
-        public void AddNewLoan(decimal amount, string description, string name, string familyName);
+        public void AddNewLoan(string newRegistration);
 
         public List<Loan> GetAllLoans();
 
