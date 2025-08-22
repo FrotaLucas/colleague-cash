@@ -1,38 +1,45 @@
 ﻿using ColleagueCash.Domain.Contracts.Interfaces.IFiles;
 using ColleagueCash.Domain.Entities;
+using CollegueCashV2.Application.Configuration;
+using System.IO;
 
 namespace ColleagueCash.Infrastructure.Files
 {
     public class File : IFile
     {
-        public void AppendAllText(string path, string content)
+
+        public static bool Exists(string path) //PQ precisa ser estatico ??
+        {
+             return File.Exists(path);
+        }
+
+        public string[] ReadAllLinesBorrowers(string path)
+        {
+            var response =  File.ReadAllLines(path);
+
+            return response.ToArray();
+        }
+
+        public static List<Loan> ReadAllLinesLoan(string path)
         {
             throw new NotImplementedException();
         }
 
-        public bool Exists(string path)
+        public static string ReadAllText(string idPath)
         {
-            throw new NotImplementedException();
+            return File.ReadAllText(idPath);
         }
 
-        public List<Borrower> ReadAllLinesBorrowers(string path)
+        public static void WriteAllText(string path, string content)
         {
-            throw new NotImplementedException();
+            File.WriteAllText(path, content + Environment.NewLine);
+
         }
 
-        public List<Loan> ReadAllLinesLoan(string path)
+        public static void AppendAllText(string path, string content)
         {
-            throw new NotImplementedException();
-        }
+            File.AppendAllText(path, content + Environment.NewLine);
 
-        public string ReadAllText(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteAllText(string path, string content)
-        {
-            throw new NotImplementedException();
         }
     }
 }
