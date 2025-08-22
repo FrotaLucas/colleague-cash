@@ -56,7 +56,7 @@ namespace ColleagueCash.Infrastructure
                 Console.WriteLine("List of colleagues not created.");
                 return new List<Borrower>();
             }
-
+           
 
             var borrowers = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath)
                 .Skip(1)

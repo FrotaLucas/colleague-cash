@@ -40,6 +40,8 @@ namespace ColleagueCash.Infrastructure
                 FamilyName = familyName,
             };
 
+            //ToDO
+            //try catch // desfazer o que vc fez no lista de arquivo 
             Borrower newBorrower = _repositoryBorrower.AddNewBorrower(borrower);
 
             newRegistration = $"{idRegistration};{description};{amount};{date:yyyy-MM-dd};{newBorrower.BorrowerId}";
