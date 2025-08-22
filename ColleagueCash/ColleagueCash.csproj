@@ -8,7 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Domain\Contracts\Interfaces\IFiles\" />
 		<Folder Include="Infrastructure\WorkLoad\" />
 	</ItemGroup>
 
