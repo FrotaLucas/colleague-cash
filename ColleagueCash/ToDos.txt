@@ -8,3 +8,7 @@ infrastructure  >
 					                 IRepositoryLoan.cs
 									 RepositoryLoan.cs
 
+data de nascimento para individualizar borrower
+
+
+existedBorrower -> getBorrowerByEmail (identidade do nome)
