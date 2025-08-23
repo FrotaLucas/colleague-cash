@@ -126,11 +126,14 @@ namespace ColleagueCash.Infrastructure
         {
             int id = 0;
 
-            if (File.Exists(_appConfig.DataFilesCSV.LastLoanIdFile))
-                id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastLoanIdFile));
+            if (File.Exists(_appConfig.DataFilesCSV.LoanPath))
+            {
+                string lastLine = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).Last();
+
+                id = int.Parse(lastLine.Split(';').First());
+            }
 
             int newId = id + 1;
-            File.WriteAllText(_appConfig.DataFilesCSV.LastLoanIdFile, newId.ToString());
             return newId;
         }
     }
