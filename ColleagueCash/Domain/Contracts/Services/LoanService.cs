@@ -8,19 +8,16 @@ namespace ColleagueCash.Domain.Contracts.Services
 {
     public class LoanService : ILoanService
     {
-        private readonly AppConfig _appConfig;
         private ILoanRepository _repositoryLoan;
         private IBorrowerRepository _repositoryBorrower;
         private IBorrowerService _borrowerService;
         
 
         public LoanService(
-            IOptions<AppConfig> appConfig, 
             ILoanRepository repositoryLoan, 
             IBorrowerRepository repositoryBorrower,
             IBorrowerService borrowerService)
         {
-            _appConfig = appConfig.Value;
             _repositoryLoan = repositoryLoan;
             _repositoryBorrower = repositoryBorrower;
             _borrowerService = borrowerService;
