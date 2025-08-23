@@ -8,10 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Infrastructure\WorkLoad\Repository\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.8" />
@@ -30,7 +26,7 @@
 		<None Update="Application\appsettings.Development.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Infrastructure\WorkLoad\borrower-registration.csv">
+		<None Update="Infrastructure\WorkLoad\Repository\borrower-registration.csv">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Infrastructure\WorkLoad\last-borrowerid.txt">
@@ -39,7 +35,7 @@
 		<None Update="Infrastructure\WorkLoad\last-loanId.txt">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Infrastructure\WorkLoad\loan-registration.csv">
+		<None Update="Infrastructure\WorkLoad\Repository\loan-registration.csv">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
