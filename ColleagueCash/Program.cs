@@ -49,10 +49,6 @@ class Program
                     options.DataFilesCSV.LoanPath = Path.Combine(projectDirectory, options.DataFilesCSV.LoanPath);
                     options.DataFilesCSV.BorrowerPath =
                         Path.Combine(projectDirectory, options.DataFilesCSV.BorrowerPath);
-                    options.DataFilesCSV.LastBorrowerIdFile =
-                        Path.Combine(projectDirectory, options.DataFilesCSV.LastBorrowerIdFile);
-                    options.DataFilesCSV.LastLoanIdFile =
-                        Path.Combine(projectDirectory, options.DataFilesCSV.LastLoanIdFile);
                 });
 
                 services.AddSingleton<ILoanService, LoanService>();
