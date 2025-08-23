@@ -1,14 +1,11 @@
 ﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Entities;
-using ColleagueCash.Application.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
     public class BorrowerService : IBorrowerService
     {
-
 
         public readonly IBorrowerRepository _repositoryBorrower;
 
