@@ -46,7 +46,9 @@ namespace ColleagueCash.Domain.Contracts.Services
 
             if (borrower != null && borrower.BorrowerId != null)
             {
-                var listOfLoan = _repositoryLoan.GetAllLoansByBorrowerId(borrower.BorrowerId);
+                var listOfLoan = _repositoryLoan.GetAllLoansByBorrowerId(borrower.BorrowerId)
+                    .OrderBy(loan => loan.LoanDate)
+                    .ToList();
 
                 int i = 0;
                 while (amount > 0 && i < listOfLoan.Count)
@@ -111,7 +113,7 @@ namespace ColleagueCash.Domain.Contracts.Services
         {
             var loans = _repositoryLoan.GetAllLoansByBorrower(name, familyName)
                 .Where(loan => loan.Amount > 0)
-                .OrderByDescending(loan => loan.LoanDate);
+                .OrderBy(loan => loan.LoanDate);
 
 
             foreach (var loan in loans)
