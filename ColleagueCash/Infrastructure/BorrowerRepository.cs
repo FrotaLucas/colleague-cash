@@ -19,11 +19,19 @@ namespace ColleagueCash.Infrastructure
             int id = 0;
 
             if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
-                id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile));
-           
+            {
+                string lastLine = File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Last();
+
+                id = int.Parse(lastLine.Split(';').First());
+            }
+
+
+            //if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
+            //    id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile));
+
 
             int newId = id + 1;
-            File.WriteAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile, newId.ToString());
+            //File.WriteAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile, newId.ToString());
             return newId;
         }
 
@@ -56,25 +64,26 @@ namespace ColleagueCash.Infrastructure
                 Console.WriteLine("List of colleagues not created.");
                 return new List<Borrower>();
             }
-           
 
-            var borrowers = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath)
-                .Skip(1)
-                .Select(line => line.Split(";"))
-                .Select(line => new Borrower
-                {
-                    Name = line[1],
-                    FamilyName = line[2],
-                    Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
-                })
-                .ToList();
+            var borrowers = new List<Borrower>();
+
+            borrowers = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath)
+                  .Skip(1)
+                  .Select(line => line.Split(";"))
+                  .Select(line => new Borrower
+                  {
+                      Name = line[1],
+                      FamilyName = line[2],
+                      Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
+                  })
+                  .ToList();
 
             return borrowers;
         }
 
         public Borrower GetBorrowerByEmail(string name, string familyName)
         {
-            if(!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
+            if (!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
                 File.WriteAllText(_appConfig.DataFilesCSV.BorrowerPath, "id;name;familyName;cellphone" + Environment.NewLine);
 
             var lines = File.ReadAllLines(_appConfig.DataFilesCSV.BorrowerPath).Skip(1);
@@ -82,7 +91,7 @@ namespace ColleagueCash.Infrastructure
 
             if (!lines.Any())
                 return null;
-            
+
             var borrower = lines
                 .Select(line => line.Split(";"))
                 .Where(line => line[1].Contains(name) && line[2].Contains(familyName))

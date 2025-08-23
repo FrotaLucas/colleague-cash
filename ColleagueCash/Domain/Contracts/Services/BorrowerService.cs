@@ -18,7 +18,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             _repositoryBorrower = repositoryBorrower;
             _appConfig = appConfig.Value;
         }
-        
+
         public int AddNewBorrower(string name, string familyName)
         {
             Borrower newBorrower = new Borrower
@@ -42,14 +42,22 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void GetAllBorrowersOrderedByName()
         {
-            var borrowers = _repositoryBorrower.GetAllBorrowers()
-                .OrderBy(borrower => borrower.Name);
+            List<Borrower> borrowers = _repositoryBorrower.GetAllBorrowers()
+                  .OrderBy(b => b.Name)
+                  .ToList();
 
-
-            foreach (var borrower in borrowers)
+            if (borrowers.Count > 0)
             {
-                Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
+                foreach (var borrower in borrowers)
+                {
+                    Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
+                }
+                return;
             }
+
+            Console.WriteLine("List of colleagues not created.");
+            return;
+
         }
 
 
