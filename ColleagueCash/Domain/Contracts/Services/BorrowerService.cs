@@ -12,7 +12,7 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public readonly IBorrowerRepository _repositoryBorrower;
 
-        public BorrowerService(IBorrowerRepository repositoryBorrower, IOptions<AppConfig> appConfig)
+        public BorrowerService(IBorrowerRepository repositoryBorrower)
         {
             _repositoryBorrower = repositoryBorrower;
         }
