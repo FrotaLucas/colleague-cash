@@ -20,18 +20,17 @@ namespace ColleagueCash.Infrastructure
 
             if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
             {
-                string lastLine = File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Last();
+                if (File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Count() == 1)
+                    id = 0;
 
-                id = int.Parse(lastLine.Split(';').First());
+                else
+                {
+                    string lastLine = File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Last();
+                    id = int.Parse(lastLine.Split(';').First());
+                }
             }
 
-
-            //if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
-            //    id = int.Parse(File.ReadAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile));
-
-
             int newId = id + 1;
-            //File.WriteAllText(_appConfig.DataFilesCSV.LastBorrowerIdFile, newId.ToString());
             return newId;
         }
 
