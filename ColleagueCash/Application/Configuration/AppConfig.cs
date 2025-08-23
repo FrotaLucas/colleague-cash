@@ -7,7 +7,5 @@ public class AppConfig
     {
         public string LoanPath { get; set; }
         public string BorrowerPath { get; set; }
-        public string LastBorrowerIdFile { get; set; }
-        public string LastLoanIdFile { get; set; }
     }
 }
