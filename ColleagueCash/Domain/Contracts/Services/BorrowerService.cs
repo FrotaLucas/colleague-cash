@@ -9,14 +9,12 @@ namespace ColleagueCash.Domain.Contracts.Services
     public class BorrowerService : IBorrowerService
     {
 
-        private readonly AppConfig _appConfig;
 
         public readonly IBorrowerRepository _repositoryBorrower;
 
         public BorrowerService(IBorrowerRepository repositoryBorrower, IOptions<AppConfig> appConfig)
         {
             _repositoryBorrower = repositoryBorrower;
-            _appConfig = appConfig.Value;
         }
 
         public int AddNewBorrower(string name, string familyName)
@@ -30,15 +28,6 @@ namespace ColleagueCash.Domain.Contracts.Services
 
             return borrower.BorrowerId;
         }
-
-        //public List<Borrower> GetAllBorrowersByFamilyName() {
-
-        //    var borrowers = _repositoryBorrower.GetAllBorrowers()
-        //        .OrderBy( borrower => borrower.FamilyName )
-        //        .ToList();  
-
-        //    return borrowers;
-        //}
 
         public void GetAllBorrowersOrderedByName()
         {
@@ -57,9 +46,7 @@ namespace ColleagueCash.Domain.Contracts.Services
 
             Console.WriteLine("List of colleagues not created.");
             return;
-
         }
-
 
     }
 }
