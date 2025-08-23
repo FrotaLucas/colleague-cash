@@ -1,8 +1,8 @@
-﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
+﻿using ColleagueCash.Application.Configuration;
+using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Contracts.Services;
 using ColleagueCash.Infrastructure;
-using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

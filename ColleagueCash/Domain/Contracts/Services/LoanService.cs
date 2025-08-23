@@ -1,7 +1,7 @@
-﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
+﻿using ColleagueCash.Application.Configuration;
+using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Entities;
-using CollegueCashV2.Application.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Domain.Contracts.Services

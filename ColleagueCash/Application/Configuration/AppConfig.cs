@@ -1,4 +1,4 @@
-﻿namespace CollegueCashV2.Application.Configuration;
+﻿namespace ColleagueCash.Application.Configuration;
 
 public class AppConfig
 {
@@ -10,5 +10,4 @@ public class AppConfig
         public string LastBorrowerIdFile { get; set; }
         public string LastLoanIdFile { get; set; }
     }
-
 }

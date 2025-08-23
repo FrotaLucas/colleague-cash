@@ -1,6 +1,6 @@
 ﻿//using ColleagueCash.Domain.Contracts.Interfaces.IFiles;
 //using ColleagueCash.Domain.Entities;
-//using CollegueCashV2.Application.Configuration;
+//using ColleagueCash.Application.Configuration;
 //using System.IO;
 
 //namespace ColleagueCash.Infrastructure.Files
