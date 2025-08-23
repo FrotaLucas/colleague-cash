@@ -16,6 +16,5 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IRepository
 
         public int GetNextId();
 
-        public void UpdateLoanFile(List<Loan> loans);
     }
 }

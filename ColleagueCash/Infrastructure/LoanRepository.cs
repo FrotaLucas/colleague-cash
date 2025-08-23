@@ -78,15 +78,6 @@ namespace ColleagueCash.Infrastructure
 
         public void ReduceLoan(List<Loan> loans)
         {
-            //try catch tbm 
-
-            UpdateLoanFile(loans);
-        }
-
-
-        public void UpdateLoanFile(List<Loan> loans)
-        {
-
             var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath);
 
             List<string> updatedFile = new List<string> { "id;description;amount;date;idBorrower" };
@@ -107,6 +98,7 @@ namespace ColleagueCash.Infrastructure
 
             File.WriteAllLines(_appConfig.DataFilesCSV.LoanPath, updatedFile);
         }
+
 
         public List<Loan> GetAllLoansByBorrowerId(int id)
         {
