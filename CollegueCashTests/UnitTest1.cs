@@ -40,8 +40,7 @@ public class LoanServiceTests : IDisposable
             {
                 LoanPath = _loanCsv,
                 BorrowerPath = _borrowerCsv,
-                LastBorrowerIdFile = _lastBorrowerId,
-                LastLoanIdFile = _lastLoanId
+            
             }
         };
 
@@ -49,12 +48,12 @@ public class LoanServiceTests : IDisposable
         _borrowerRepo = new Mock<IBorrowerRepository>(MockBehavior.Strict);
         _borrowerService = new Mock<IBorrowerService>(MockBehavior.Strict);
 
-        _sut = new LoanService(
-            Options.Create(appConfig),
-            _loanRepo.Object,
-            _borrowerRepo.Object,
-            _borrowerService.Object
-        );
+        //_sut = new LoanService(
+        //    Options.Create(appConfig),
+        //    _loanRepo.Object,
+        //    _borrowerRepo.Object,
+        //    _borrowerService.Object
+        //);
     }
 
     [TearDown]
