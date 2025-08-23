@@ -20,15 +20,11 @@ namespace ColleagueCash.Infrastructure
         //TERMINAR
         public void AddNewLoan(string newRegistration)
         {
-            try
-            {
-                File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+
+            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
+                File.WriteAllText(_appConfig.DataFilesCSV.LoanPath, "id;description;amount;date;idBorrower" + Environment.NewLine);
+
+            File.AppendAllText(_appConfig.DataFilesCSV.LoanPath, newRegistration + Environment.NewLine);
         }
 
         public List<Loan> GetAllLoans()
@@ -88,7 +84,7 @@ namespace ColleagueCash.Infrastructure
         }
 
 
-        public void UpdateLoanFile(List<Loan> loans )
+        public void UpdateLoanFile(List<Loan> loans)
         {
 
             var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath);

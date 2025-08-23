@@ -32,11 +32,6 @@ namespace ColleagueCash.Domain.Contracts.Services
             
             int idRegistration = _repositoryLoan.GetNextId();
 
-            //trecho BAIXO nivel
-            //criar metodo LOANREPOSITORY para fazer essa operacao
-            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath))
-                File.WriteAllText(_appConfig.DataFilesCSV.LoanPath, "id;description;amount;date;idBorrower" + Environment.NewLine);
-            
             if (storedBorrower is null)
             {
                 storedBorrower = new Borrower();
