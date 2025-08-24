@@ -25,7 +25,7 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName)
         {
-            Borrower storedBorrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+            Borrower storedBorrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
             
             int idRegistration = _repositoryLoan.GetNextId();
 
@@ -42,7 +42,7 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public bool ReduceLoan(string name, string familyName, decimal amount)
         {
-            var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+            var borrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
 
             if (borrower != null && borrower.BorrowerId != null)
             {

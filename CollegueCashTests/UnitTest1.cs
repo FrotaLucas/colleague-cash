@@ -72,7 +72,7 @@ public class LoanServiceTests : IDisposable
     {
         // Arrange
         _borrowerRepo
-            .Setup(r => r.GetBorrowerByEmail("Ana", "Silva"))
+            .Setup(r => r.GetBorrowerByFullname("Ana", "Silva"))
             .Returns(new Borrower { BorrowerId = 42, Name = "Ana", FamilyName = "Silva" });
 
         _loanRepo.Setup(r => r.GetNextId()).Returns(7);
@@ -99,7 +99,7 @@ public class LoanServiceTests : IDisposable
     public void RegisterNewLoan_BorrowerMissing_CreatesBorrower_AndUsesReturnedId()
     {
         // Arrange
-        _borrowerRepo.Setup(r => r.GetBorrowerByEmail("Joao", "Souza")).Returns((Borrower?)null);
+        _borrowerRepo.Setup(r => r.GetBorrowerByFullname("Joao", "Souza")).Returns((Borrower?)null);
         _borrowerService.Setup(s => s.AddNewBorrower("Joao", "Souza")).Returns(99);
         _loanRepo.Setup(r => r.GetNextId()).Returns(1);
 
@@ -122,7 +122,7 @@ public class LoanServiceTests : IDisposable
     {
         // Arrange
         Assert.That(File.Exists(_loanCsv), Is.False);
-        _borrowerRepo.Setup(r => r.GetBorrowerByEmail(It.IsAny<string>(), It.IsAny<string>()))
+        _borrowerRepo.Setup(r => r.GetBorrowerByFullname(It.IsAny<string>(), It.IsAny<string>()))
                      .Returns(new Borrower { BorrowerId = 1, Name = "X", FamilyName = "Y" });
         _loanRepo.Setup(r => r.GetNextId()).Returns(1);
         _loanRepo.Setup(r => r.AddNewLoan(It.IsAny<string>()));

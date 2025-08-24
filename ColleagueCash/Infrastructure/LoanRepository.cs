@@ -50,7 +50,7 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoansByBorrower(string name, string familyName)
         {
-            Borrower borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+            Borrower borrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
 
             var loans = new List<Loan>();
 
