@@ -30,7 +30,7 @@ class Program
             })
             .ConfigureServices((ctx, services) =>
             {
-                Console.WriteLine(ctx.Configuration["DataFilesCSV:LoanPath"]);
+                //Console.WriteLine(ctx.Configuration["DataFilesCSV:LoanPath"]);
 
                 // ✨ Bind do appsettings inteiro
                 //opt1
@@ -66,7 +66,7 @@ class Program
 
         //op2
         var cfg = host.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<AppConfig>>().Value;
-        Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
+        //Console.WriteLine($"[Main] Path Loan is: {cfg.DataFilesCSV.LoanPath}");
 
 
         var loanService = host.Services.GetRequiredService<ILoanService>();
@@ -104,7 +104,7 @@ class Program
             Console.WriteLine("3 - List all debts ordered by amount\n"); //By amount
             Console.WriteLine("4 - List all debts ordered by date\n");
             Console.WriteLine("5 - List all debts of a colleague\n");
-            Console.WriteLine("6 - List all your colleagues\n");
+            Console.WriteLine("6 - List all your colleagues who owe you money\n");
             Console.WriteLine("0 - Exit\n");
             Console.Write("Your option: ");
 
@@ -191,9 +191,7 @@ class Program
                     }
 
                     else
-                    {
                         Console.WriteLine("Invalid Amount");
-                    }
 
                     break;
 
