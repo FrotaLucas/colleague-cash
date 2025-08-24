@@ -1,8 +1,6 @@
-﻿using ColleagueCash.Application.Configuration;
-using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Entities;
-using Microsoft.Extensions.Options;
 
 namespace ColleagueCash.Domain.Contracts.Services
 {
@@ -68,7 +66,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 }
 
                 if (amount > 0)
-                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds by {amount} Euros");
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds by {amount} Euros.");
 
                 _repositoryLoan.ReduceLoan(listOfLoan);
                 return true;
