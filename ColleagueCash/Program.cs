@@ -142,9 +142,7 @@ class Program
                     }
 
                     else
-                    {
                         Console.WriteLine("Invalid Amount");
-                    }
 
                     break;
 
@@ -158,8 +156,8 @@ class Program
                     Console.Write("Amount to be paid: ");
                     if (decimal.TryParse(Console.ReadLine(), out amount))
                     {
-                        loanService.ReduceLoan(name, familyName, amount);
-                        Console.WriteLine("Payment registered!");
+                        if(loanService.ReduceLoan(name, familyName, amount))
+                            Console.WriteLine("Payment registered!");
                     }
 
                     else

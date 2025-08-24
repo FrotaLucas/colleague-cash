@@ -40,7 +40,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             _repositoryLoan.AddNewLoan(newRegistration);
         }
 
-        public void ReduceLoan(string name, string familyName, decimal amount)
+        public bool ReduceLoan(string name, string familyName, decimal amount)
         {
             var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
 
@@ -71,10 +71,14 @@ namespace ColleagueCash.Domain.Contracts.Services
                     Console.WriteLine($"Warining: Payment amount exceeds the total loan");
 
                 _repositoryLoan.ReduceLoan(listOfLoan);
+                return true;
             }
 
             else
+            {
                 Console.WriteLine("Colleage not registered yet.");
+                return false;
+            }
         }
 
         public void DisplayAllLoansByAmount()
