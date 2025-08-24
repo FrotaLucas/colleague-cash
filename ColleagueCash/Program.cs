@@ -139,14 +139,14 @@ class Program
                         familyName = fullName1[1];
                     }
 
-
-
-                    //string? cellphone = null;
-                    //Console.WriteLine("Cellphone Number: Y/N:");
-                    //{
-                    //    Console.Write("Enter cellphone number: ");
-                    //    cellphone = Console.ReadLine();
-                    //}
+                    int? cellphone = null;
+                    Console.WriteLine("Cellphone Number: Y/N: ");
+                  
+                    if(Console.ReadLine().ToLower() == "y")
+                    {
+                        Console.Write("Enter cellphone number: ");
+                        cellphone = int.Parse(Console.ReadLine());
+                    }
 
                     Console.Write("Amount: ");
                     if (decimal.TryParse(Console.ReadLine(), out amount))
@@ -154,7 +154,7 @@ class Program
                         Console.Write("Short description for the loan: ");
                         description = Console.ReadLine();
 
-                        loanService.RegisterNewLoan(amount, description, name, familyName);
+                        loanService.RegisterNewLoan(amount, description, name, familyName, cellphone);
                         Console.WriteLine("Loan registered!");
                     }
 
