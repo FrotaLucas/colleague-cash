@@ -68,7 +68,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 }
 
                 if (amount > 0)
-                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds in {amount}€");
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds by {amount} Euros");
 
                 _repositoryLoan.ReduceLoan(listOfLoan);
                 return true;
