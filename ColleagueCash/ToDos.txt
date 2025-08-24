@@ -1,14 +1,5 @@
-﻿1 modelagem/arquitetura
-
-nao seria melhor colocar IRepositoryLoan e RepositoryLoan dentro de uma mesma pasta RepositoryLoan dentro
-de infrastructure?
-
-infrastructure  >
-					RepositoryLoan >
-					                 IRepositoryLoan.cs
-									 RepositoryLoan.cs
-
-data de nascimento para individualizar borrower
+﻿adicionar propriedade List<Loan> loans na classe Borrower
 
 
-existedBorrower -> getBorrowerByEmail (identidade do nome)
+2 criar metodo na classe LoanService que devolve borrowers com lista de Loan.
+ou seja mostrar Loans com nome que ele pertence
