@@ -21,7 +21,7 @@ namespace ColleagueCash.Infrastructure
             if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
             {
                 if (File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Count() == 1)
-                    id = 0;
+                    return id;
 
                 else
                 {
@@ -91,7 +91,8 @@ namespace ColleagueCash.Infrastructure
             if (!lines.Any())
                 return null;
 
-            var borrower = lines
+            var borrower = new Borrower();
+            borrower = lines
                 .Select(line => line.Split(";"))
                 .Where(line => line[1].Contains(name) && line[2].Contains(familyName))
                 .Select(line => new Borrower
