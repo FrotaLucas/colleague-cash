@@ -83,10 +83,10 @@ public class LoanServiceTests : IDisposable
             .Callback<string>(s => captured = s);
 
         // Act
-        _sut.RegisterNewLoan(1500.00m, "Notebook", "Ana", "Silva");
+        _sut.RegisterNewLoan(1500.00m, "Notebook", "Ana", "Silva", 21992345);
 
         // Assert
-        _borrowerService.Verify(s => s.AddNewBorrower(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        _borrowerService.Verify(s => s.AddNewBorrower(It.IsAny<string>(), It.IsAny<string>(), 21992345), Times.Never);
         _loanRepo.Verify(r => r.GetNextId(), Times.Once);
         _loanRepo.Verify(r => r.AddNewLoan(It.IsAny<string>()), Times.Once);
 
@@ -100,7 +100,7 @@ public class LoanServiceTests : IDisposable
     {
         // Arrange
         _borrowerRepo.Setup(r => r.GetBorrowerByFullname("Joao", "Souza")).Returns((Borrower?)null);
-        _borrowerService.Setup(s => s.AddNewBorrower("Joao", "Souza")).Returns(99);
+        _borrowerService.Setup(s => s.AddNewBorrower("Joao", "Souza", 21992345)).Returns(99);
         _loanRepo.Setup(r => r.GetNextId()).Returns(1);
 
         string? captured = null;
@@ -109,10 +109,10 @@ public class LoanServiceTests : IDisposable
             .Callback<string>(s => captured = s);
 
         // Act
-        _sut.RegisterNewLoan(10.5m, "Cafe", "Joao", "Souza");
+        _sut.RegisterNewLoan(10.5m, "Cafe", "Joao", "Souza", 21992345);
 
         // Assert
-        _borrowerService.Verify(s => s.AddNewBorrower("Joao", "Souza"), Times.Once);
+        _borrowerService.Verify(s => s.AddNewBorrower("Joao", "Souza", 21992345), Times.Once);
         Assert.That(captured, Is.Not.Null);
         Assert.That(captured!.TrimEnd('\r', '\n'), Does.EndWith(";99"));
     }
@@ -128,7 +128,7 @@ public class LoanServiceTests : IDisposable
         _loanRepo.Setup(r => r.AddNewLoan(It.IsAny<string>()));
 
         // Act
-        _sut.RegisterNewLoan(1m, "x", "X", "Y");
+        _sut.RegisterNewLoan(1m, "x", "X", "Y", 21992345);
 
         // Assert
         Assert.That(File.Exists(_loanCsv), Is.True);
