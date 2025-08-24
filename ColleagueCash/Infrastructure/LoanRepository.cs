@@ -17,7 +17,6 @@ namespace ColleagueCash.Infrastructure
             _appConfig = appConfig.Value;
         }
 
-        //TERMINAR
         public void AddNewLoan(string newRegistration)
         {
 
