@@ -1,4 +1,5 @@
-﻿using ColleagueCash.Application.Configuration;
+﻿using System.Threading.Channels;
+using ColleagueCash.Application.Configuration;
 using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Contracts.Services;
@@ -118,11 +119,27 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName1 = Console.ReadLine().ToLower().Split(' ');
+                    Console.Write("Name and Last name of the Colleague. (ex. Thomas Müller): ");
 
-                    name = fullName1[0];
-                    familyName = fullName1[1];
+                    var inputName = Console.ReadLine().ToLower();
+                    string[] fullName1;
+
+                    if (!inputName.Contains(' '))
+                    {
+                        Console.WriteLine("Please enter your full name (First Name and Last name).");
+                        fullName1 = Console.ReadLine().ToLower().Split(' ');
+                        name = fullName1[0];
+                        familyName = fullName1[1];
+                    }
+
+                    else
+                    {
+                        fullName1 = inputName.Split(' ');
+                        name = fullName1[0];
+                        familyName = fullName1[1];
+                    }
+
+
 
                     //string? cellphone = null;
                     //Console.WriteLine("Cellphone Number: Y/N:");
@@ -148,15 +165,28 @@ class Program
 
                 case "2":
                     Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName = Console.ReadLine().ToLower().Split(' ');
+                    var inputName2 = Console.ReadLine().ToLower();
+                    string[] fullName2;
 
-                    name = fullName[0];
-                    familyName = fullName[1];
+                    if (!inputName2.Contains(' '))
+                    {
+                        Console.WriteLine("Please enter your full name (First Name and Last name).");
+                        fullName2 = Console.ReadLine().ToLower().Split(' ');
+                        name = fullName2[0];
+                        familyName = fullName2[1];
+                    }
+
+                    else
+                    {
+                        fullName2 = inputName2.Split(' ');
+                        name = fullName2[0];
+                        familyName = fullName2[1];
+                    }
 
                     Console.Write("Amount to be paid: ");
                     if (decimal.TryParse(Console.ReadLine(), out amount))
                     {
-                        if(loanService.ReduceLoan(name, familyName, amount))
+                        if (loanService.ReduceLoan(name, familyName, amount))
                             Console.WriteLine("Payment registered!");
                     }
 
@@ -177,10 +207,23 @@ class Program
 
                 case "5":
                     Console.Write("Name and Family name of the Colleague. (ex. Thomas Müller): ");
-                    var fullName5 = Console.ReadLine().ToLower().Split(' ');
+                    var inputName5 = Console.ReadLine().ToLower();
+                    string[] fullName5;
 
-                    name = fullName5[0];
-                    familyName = fullName5[1];
+                    if (!inputName5.Contains(' '))
+                    {
+                        Console.WriteLine("Please enter your full name (First Name and Last name).");
+                        fullName5 = Console.ReadLine().ToLower().Split(' ');
+                        name = fullName5[0];
+                        familyName = fullName5[1];
+                    }
+
+                    else
+                    {
+                        fullName5 = inputName5.Split(' ');
+                        name = fullName5[0];
+                        familyName = fullName5[1];
+                    }
 
                     loanService.DisplayAllLoansOfColleague(name, familyName);
                     break;
