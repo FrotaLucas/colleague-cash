@@ -4,7 +4,7 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IService
 {
     public interface ILoanService
     {
-        public void RegisterNewLoan(decimal amount, string description, string name, string familyName);
+        public void RegisterNewLoan(decimal amount, string description, string name, string familyName, int? cellphone);
 
         public bool ReduceLoan(string name, string familyName, decimal amount);
 

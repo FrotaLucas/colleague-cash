@@ -21,7 +21,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             _borrowerService = borrowerService;
         }
 
-        public void RegisterNewLoan(decimal amount, string description, string name, string familyName)
+        public void RegisterNewLoan(decimal amount, string description, string name, string familyName, int? cellphone)
         {
             Borrower storedBorrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
             
@@ -30,7 +30,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             if (storedBorrower is null)
             {
                 storedBorrower = new Borrower();
-                int borrowerId = _borrowerService.AddNewBorrower(name, familyName);
+                int borrowerId = _borrowerService.AddNewBorrower(name, familyName, cellphone);
                 storedBorrower.BorrowerId = borrowerId;
             }
             

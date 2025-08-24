@@ -14,12 +14,13 @@ namespace ColleagueCash.Domain.Contracts.Services
             _repositoryBorrower = repositoryBorrower;
         }
 
-        public int AddNewBorrower(string name, string familyName)
+        public int AddNewBorrower(string name, string familyName, int? cellphone)
         {
             Borrower newBorrower = new Borrower
             {
                 Name = name,
                 FamilyName = familyName,
+                Cellphone = cellphone
             };
             Borrower borrower = _repositoryBorrower.AddNewBorrower(newBorrower);
 
