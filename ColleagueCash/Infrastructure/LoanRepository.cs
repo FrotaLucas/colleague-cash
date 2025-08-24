@@ -34,7 +34,7 @@ namespace ColleagueCash.Infrastructure
                 return new List<Loan>();
             }
 
-            var loans = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath)
+            List<Loan> loans = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath)
                 .Skip(1)
                 .Select(line => line.Split(";"))
                 .Select(line => new Loan
@@ -50,7 +50,7 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoansByBorrower(string name, string familyName)
         {
-            var borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
+            Borrower borrower = _repositoryBorrower.GetBorrowerByEmail(name, familyName);
 
             var loans = new List<Loan>();
 
@@ -103,7 +103,7 @@ namespace ColleagueCash.Infrastructure
         {
             var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).ToList();
 
-            var listOfLoan = allLines
+            List<Loan> listOfLoan = allLines
                 .Skip(1)
                 .Select(line => line.Split(";"))
                 .Where(line => int.Parse(line[4]) == id)
