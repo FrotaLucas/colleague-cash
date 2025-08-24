@@ -68,7 +68,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 }
 
                 if (amount > 0)
-                    Console.WriteLine($"Warining: Payment amount exceeds the total loan");
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds in {amount}€");
 
                 _repositoryLoan.ReduceLoan(listOfLoan);
                 return true;
@@ -119,6 +119,10 @@ namespace ColleagueCash.Domain.Contracts.Services
                 .Where(loan => loan.Amount > 0)
                 .OrderBy(loan => loan.LoanDate);
 
+            if (!loans.Any())
+            {   Console.WriteLine("Colleague doesn't have any debt.");
+                return;
+            }
 
             foreach (var loan in loans)
             {

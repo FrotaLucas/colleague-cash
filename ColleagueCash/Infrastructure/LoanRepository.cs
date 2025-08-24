@@ -69,9 +69,6 @@ namespace ColleagueCash.Infrastructure
                     .ToList();
             }
 
-            if (loans.Count == 0)
-                Console.WriteLine("Colleague not registered yet.");
-
             return loans;
         }
 
