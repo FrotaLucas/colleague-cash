@@ -94,7 +94,7 @@ namespace ColleagueCash.Infrastructure
             var borrower = new Borrower();
             borrower = lines
                 .Select(line => line.Split(";"))
-                .Where(line => line[1].Contains(name) && line[2].Contains(familyName))
+                .Where(line => line[1] == name && line[2] == familyName)
                 .Select(line => new Borrower
                 {
                     BorrowerId = int.Parse(line[0]),
