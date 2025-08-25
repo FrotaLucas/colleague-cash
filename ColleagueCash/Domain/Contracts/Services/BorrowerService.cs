@@ -37,22 +37,23 @@ namespace ColleagueCash.Domain.Contracts.Services
                   .OrderBy(b => b.Name)
                   .ToList();
 
-            if (borrowers.Count > 0)
+            if (borrowers.Count == 0)
             {
-                foreach (var borrower in borrowers)
-                {
-                    Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
-                }
+                Console.WriteLine("List of colleagues not created.");
                 return;
             }
 
-            Console.WriteLine("List of colleagues not created.");
-            return;
+
+            foreach (var borrower in borrowers)
+            {
+                Console.WriteLine($"Colleague: {borrower.Name} {borrower.FamilyName}");
+            }
+
         }
 
         public List<Borrower> GetAllBorrowersWithLoans()
         {
-            var borrowers = new List<Borrower>();   
+            var borrowers = new List<Borrower>();
             borrowers = _repositoryBorrower.GetAllBorrowers();
 
             foreach (Borrower b in borrowers)
