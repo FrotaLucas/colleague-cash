@@ -59,10 +59,7 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
         public List<Borrower> GetAllBorrowers()
         {
             if (!File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
-            {
-                Console.WriteLine("List of colleagues not created.");
                 return new List<Borrower>();
-            }
 
             var borrowers = new List<Borrower>();
 
@@ -109,6 +106,6 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
             return borrower;
         }
 
-        
+
     }
 }
