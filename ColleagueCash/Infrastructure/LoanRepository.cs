@@ -98,6 +98,13 @@ namespace ColleagueCash.Infrastructure
 
         public List<Loan> GetAllLoansByBorrowerId(int id)
         {
+
+            if (!File.Exists(_appConfig.DataFilesCSV.LoanPath) || !File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).Skip(1).Any())
+            {
+                Console.WriteLine("There are no loans registered;");
+                return new List<Loan>();
+            }
+
             var allLines = File.ReadAllLines(_appConfig.DataFilesCSV.LoanPath).ToList();
 
             List<Loan> listOfLoan = allLines
