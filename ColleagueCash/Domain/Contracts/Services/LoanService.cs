@@ -9,10 +9,10 @@ namespace ColleagueCash.Domain.Contracts.Services
         private ILoanRepository _repositoryLoan;
         private IBorrowerRepository _repositoryBorrower;
         private IBorrowerService _borrowerService;
-        
+
 
         public LoanService(
-            ILoanRepository repositoryLoan, 
+            ILoanRepository repositoryLoan,
             IBorrowerRepository repositoryBorrower,
             IBorrowerService borrowerService)
         {
@@ -24,7 +24,7 @@ namespace ColleagueCash.Domain.Contracts.Services
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName, int? cellphone)
         {
             Borrower storedBorrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
-            
+
             int idRegistration = _repositoryLoan.GetNextId();
 
             if (storedBorrower is null)
@@ -33,7 +33,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 int borrowerId = _borrowerService.AddNewBorrower(name, familyName, cellphone);
                 storedBorrower.BorrowerId = borrowerId;
             }
-            
+
             string newRegistration = $"{idRegistration};{description};{amount};{DateTime.Now:yyyy-MM-dd};{storedBorrower.BorrowerId}";
             _repositoryLoan.AddNewLoan(newRegistration);
         }
@@ -81,20 +81,40 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void DisplayAllLoansByAmount()
         {
-            var loans = _repositoryLoan.GetAllLoans()
-                .Where(loan => loan.Amount > 0)
-                .OrderByDescending(loan => loan.Amount);
+            //old code
+            //var loans = _repositoryLoan.GetAllLoans()
+            //    .Where(loan => loan.Amount > 0)
+            //    .OrderByDescending(loan => loan.Amount);
 
-            foreach (var loan in loans)                      
+            //foreach (var loan in loans)
+            //{
+            //    Console.WriteLine(
+            //        $"Outstanding amount: {loan.Amount} - " +
+            //        $"Description: {loan.Description} - " +
+            //        $"Date of registration: {loan.LoanDate}"
+            //    );
+            //}
+
+            //new code
+
+            List<Borrower> borrowers = _borrowerService.GetAllBorrowersWithLoans();
+            var allLoans = borrowers
+                .SelectMany(b => b.Loans.Select(l => new { Borrower = b, Loan = l }))
+                .OrderByDescending(newObj => newObj.Loan.Amount);
+
+
+            foreach (var item in allLoans)
             {
                 Console.WriteLine(
-                    $"Outstanding amount: {loan.Amount} - " +
-                    $"Description: {loan.Description} - " +
-                    $"Date of registration: {loan.LoanDate}"
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} " +
+                    $"Outstanding amount: {item.Loan.Amount} - " +
+                    $"Description: {item.Loan.Description} - " +
+                    $"Date of registration: {item.Loan.LoanDate}"
                 );
             }
-        }
 
+        }
+        
         public void DisplayAllLoansByDate()
         {
             var loans = _repositoryLoan.GetAllLoans()
@@ -118,7 +138,8 @@ namespace ColleagueCash.Domain.Contracts.Services
                 .OrderBy(loan => loan.LoanDate);
 
             if (!loans.Any())
-            {   Console.WriteLine("Colleague doesn't have any debt.");
+            {
+                Console.WriteLine("Colleague doesn't have any debt.");
                 return;
             }
 
