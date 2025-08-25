@@ -102,18 +102,36 @@ namespace ColleagueCash.Domain.Contracts.Services
         
         public void DisplayAllLoansByDate()
         {
-            var loans = _repositoryLoan.GetAllLoans()
-                .Where(loan => loan.Amount > 0)
-                .OrderByDescending(loan => loan.LoanDate);
+            //var loans = _repositoryLoan.GetAllLoans()
+            //    .Where(loan => loan.Amount > 0)
+            //    .OrderByDescending(loan => loan.LoanDate);
 
-            foreach (var loan in loans)
+            //foreach (var loan in loans)
+            //{
+            //    Console.WriteLine(
+            //        $"Outstanding amount: {loan.Amount} - " +
+            //        $"Description: {loan.Description} - " +
+            //        $"Date of registration: {loan.LoanDate}"
+            //    );
+            //}
+
+            var borrowers = _borrowerService.GetAllBorrowersWithLoans();
+
+            var allLoans = borrowers
+                .SelectMany(b => b.Loans.Select(l => new {Borrower = b, Loan = l}) )
+                .OrderBy(newObjt => newObjt.Loan.LoanDate);
+
+
+            foreach (var item in allLoans)
             {
                 Console.WriteLine(
-                    $"Outstanding amount: {loan.Amount} - " +
-                    $"Description: {loan.Description} - " +
-                    $"Date of registration: {loan.LoanDate}"
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} " +
+                    $"Outstanding amount: {item.Loan.Amount} - " +
+                    $"Description: {item.Loan.Description} - " +
+                    $"Date of registration: {item.Loan.LoanDate}"
                 );
             }
+
         }
 
         public void DisplayAllLoansOfColleague(string name, string familyName)
