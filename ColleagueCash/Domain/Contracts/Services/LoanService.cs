@@ -83,6 +83,14 @@ namespace ColleagueCash.Domain.Contracts.Services
         {
 
             List<Borrower> borrowers = _borrowerService.GetAllBorrowersWithLoans();
+
+            if(borrowers.Count == 0)
+            {
+                Console.WriteLine("List of colleagues not created!");
+                return;
+
+            }
+
             var allLoans = borrowers
                 .SelectMany(b => b.Loans.Select(l => new { Borrower = b, Loan = l }))
                 .OrderByDescending(newObj => newObj.Loan.Amount);
@@ -104,6 +112,13 @@ namespace ColleagueCash.Domain.Contracts.Services
         {
    
             var borrowers = _borrowerService.GetAllBorrowersWithLoans();
+
+            if (borrowers.Count == 0)
+            {
+                Console.WriteLine("List of colleagues not created!");
+                return;
+
+            }
 
             var allLoans = borrowers
                 .SelectMany(b => b.Loans.Select(l => new {Borrower = b, Loan = l}) )
