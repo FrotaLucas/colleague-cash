@@ -1,5 +1,5 @@
 id;description;amount;date;idBorrower
-1;hambuguer;200;2025-08-23;1
-2;beer and coke;23;2025-08-23;2
-3;tickets for party;300;2025-08-02;1
-4;water gas;35;2025-08-25;15;shoes;5;shoes;300;2025-08-25;3
+1;hamburger;10;2025-08-25;0
+2;coke;50;2025-08-25;1
+3;boat trip;600;2025-08-28;1
+4;shoes;400;2025-08-27;2
