@@ -9,6 +9,8 @@
         public string FamilyName { get; set; }
 
         public int? Cellphone { get; set; }
+
+        public List<Loan> Loans { get; set; } = new List<Loan>();
     }
 
 }
