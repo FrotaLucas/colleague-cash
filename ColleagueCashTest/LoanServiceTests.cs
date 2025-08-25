@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Contracts.Services;
 using ColleagueCash.Domain.Entities;
