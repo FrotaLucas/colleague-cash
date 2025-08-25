@@ -92,7 +92,9 @@ namespace ColleagueCash.Domain.Contracts.Services
             }
 
             var allLoans = borrowers
-                .SelectMany(b => b.Loans.Select(l => new { Borrower = b, Loan = l }))
+                .SelectMany(b => b.Loans
+                    .Where(b => b.Amount > 0)
+                    .Select(l => new { Borrower = b, Loan = l }))
                 .OrderByDescending(newObj => newObj.Loan.Amount);
 
 
@@ -121,7 +123,9 @@ namespace ColleagueCash.Domain.Contracts.Services
             }
 
             var allLoans = borrowers
-                .SelectMany(b => b.Loans.Select(l => new {Borrower = b, Loan = l}) )
+                .SelectMany(b => b.Loans
+                    .Where(l => l.Amount >0)
+                    .Select(l => new {Borrower = b, Loan = l}) )
                 .OrderBy(newObjt => newObjt.Loan.LoanDate);
 
 
