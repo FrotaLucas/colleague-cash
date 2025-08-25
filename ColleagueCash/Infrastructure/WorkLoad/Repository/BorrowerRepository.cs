@@ -21,7 +21,7 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
             if (File.Exists(_appConfig.DataFilesCSV.BorrowerPath))
             {
                 if (File.ReadLines(_appConfig.DataFilesCSV.BorrowerPath).Count() == 1)
-                    return id;
+                    return 1;
 
                 else
                 {
