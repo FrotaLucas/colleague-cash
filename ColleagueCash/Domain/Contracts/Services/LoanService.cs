@@ -81,21 +81,6 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void DisplayAllLoansByAmount()
         {
-            //old code
-            //var loans = _repositoryLoan.GetAllLoans()
-            //    .Where(loan => loan.Amount > 0)
-            //    .OrderByDescending(loan => loan.Amount);
-
-            //foreach (var loan in loans)
-            //{
-            //    Console.WriteLine(
-            //        $"Outstanding amount: {loan.Amount} - " +
-            //        $"Description: {loan.Description} - " +
-            //        $"Date of registration: {loan.LoanDate}"
-            //    );
-            //}
-
-            //new code
 
             List<Borrower> borrowers = _borrowerService.GetAllBorrowersWithLoans();
             var allLoans = borrowers
