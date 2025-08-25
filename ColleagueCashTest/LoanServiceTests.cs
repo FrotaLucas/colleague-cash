@@ -74,7 +74,6 @@ namespace ColleagueCashTest
             _loanService.RegisterNewLoan(100, "second test", "marie", "jane", 157239390);
 
             //1 check if addAddNewBorrower was called
-
             _borrowerServiceMock.Verify(
                 r => r.AddNewBorrower(
                     It.Is<string>(s => s.Contains("marie")),
