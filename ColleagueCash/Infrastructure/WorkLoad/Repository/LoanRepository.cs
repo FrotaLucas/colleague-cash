@@ -9,11 +9,11 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
     {
         private readonly AppConfig _appConfig;
 
-        public IBorrowerRepository _repositoryBorrower;
+        public IBorrowerRepository _borrowerRepository;
 
         public LoanRepository(IBorrowerRepository repositoryBorrower, IOptions<AppConfig> appConfig)
         {
-            _repositoryBorrower = repositoryBorrower;
+            _borrowerRepository = repositoryBorrower;
             _appConfig = appConfig.Value;
         }
 
@@ -50,7 +50,7 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
 
         public List<Loan> GetAllLoansByBorrower(string name, string familyName)
         {
-            Borrower borrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
+            Borrower borrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
 
             var loans = new List<Loan>();
 
