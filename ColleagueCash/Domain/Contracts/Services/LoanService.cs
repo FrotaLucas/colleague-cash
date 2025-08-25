@@ -6,8 +6,8 @@ namespace ColleagueCash.Domain.Contracts.Services
 {
     public class LoanService : ILoanService
     {
-        private ILoanRepository _repositoryLoan;
-        private IBorrowerRepository _repositoryBorrower;
+        private ILoanRepository _loanRepository;
+        private IBorrowerRepository _borrowerRepository;
         private IBorrowerService _borrowerService;
 
 
@@ -16,16 +16,16 @@ namespace ColleagueCash.Domain.Contracts.Services
             IBorrowerRepository repositoryBorrower,
             IBorrowerService borrowerService)
         {
-            _repositoryLoan = repositoryLoan;
-            _repositoryBorrower = repositoryBorrower;
+            _loanRepository = repositoryLoan;
+            _borrowerRepository = repositoryBorrower;
             _borrowerService = borrowerService;
         }
 
         public void RegisterNewLoan(decimal amount, string description, string name, string familyName, int? cellphone)
         {
-            Borrower storedBorrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
+            Borrower storedBorrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
 
-            int idRegistration = _repositoryLoan.GetNextId();
+            int idRegistration = _loanRepository.GetNextId();
 
             if (storedBorrower is null)
             {
@@ -35,16 +35,16 @@ namespace ColleagueCash.Domain.Contracts.Services
             }
 
             string newRegistration = $"{idRegistration};{description};{amount};{DateTime.Now:yyyy-MM-dd};{storedBorrower.BorrowerId}";
-            _repositoryLoan.AddNewLoan(newRegistration);
+            _loanRepository.AddNewLoan(newRegistration);
         }
 
         public bool ReduceLoan(string name, string familyName, decimal amount)
         {
-            var borrower = _repositoryBorrower.GetBorrowerByFullname(name, familyName);
+            var borrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
 
             if (borrower != null && borrower.BorrowerId != null)
             {
-                var listOfLoan = _repositoryLoan.GetAllLoansByBorrowerId(borrower.BorrowerId)
+                var listOfLoan = _loanRepository.GetAllLoansByBorrowerId(borrower.BorrowerId)
                     .OrderBy(loan => loan.LoanDate)
                     .ToList();
 
@@ -68,7 +68,7 @@ namespace ColleagueCash.Domain.Contracts.Services
                 if (amount > 0)
                     Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds by {amount} Euros.");
 
-                _repositoryLoan.ReduceLoan(listOfLoan);
+                _loanRepository.ReduceLoan(listOfLoan);
                 return true;
             }
 
@@ -143,7 +143,7 @@ namespace ColleagueCash.Domain.Contracts.Services
 
         public void DisplayAllLoansOfColleague(string name, string familyName)
         {
-            var loans = _repositoryLoan.GetAllLoansByBorrower(name, familyName)
+            var loans = _loanRepository.GetAllLoansByBorrower(name, familyName)
                 .Where(loan => loan.Amount > 0)
                 .OrderBy(loan => loan.LoanDate);
 
