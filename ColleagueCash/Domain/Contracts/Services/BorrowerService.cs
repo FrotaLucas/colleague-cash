@@ -7,13 +7,13 @@ namespace ColleagueCash.Domain.Contracts.Services
 {
     public class BorrowerService : IBorrowerService
     {
-        public readonly IBorrowerRepository _repositoryBorrower;
+        public readonly IBorrowerRepository _borrowerRepository;
 
         public readonly ILoanRepository _loanRepository;
 
         public BorrowerService(IBorrowerRepository repositoryBorrower, ILoanRepository loanRepository)
         {
-            _repositoryBorrower = repositoryBorrower;
+            _borrowerRepository = repositoryBorrower;
 
             _loanRepository = loanRepository;
         }
@@ -26,14 +26,14 @@ namespace ColleagueCash.Domain.Contracts.Services
                 FamilyName = familyName,
                 Cellphone = cellphone
             };
-            Borrower borrower = _repositoryBorrower.AddNewBorrower(newBorrower);
+            Borrower borrower = _borrowerRepository.AddNewBorrower(newBorrower);
 
             return borrower.BorrowerId;
         }
 
         public void GetAllBorrowersOrderedByName()
         {
-            List<Borrower> borrowers = _repositoryBorrower.GetAllBorrowers()
+            List<Borrower> borrowers = _borrowerRepository.GetAllBorrowers()
                   .OrderBy(b => b.Name)
                   .ToList();
 
@@ -54,7 +54,7 @@ namespace ColleagueCash.Domain.Contracts.Services
         public List<Borrower> GetAllBorrowersWithLoans()
         {
             var borrowers = new List<Borrower>();
-            borrowers = _repositoryBorrower.GetAllBorrowers();
+            borrowers = _borrowerRepository.GetAllBorrowers();
 
             foreach (Borrower b in borrowers)
             {
