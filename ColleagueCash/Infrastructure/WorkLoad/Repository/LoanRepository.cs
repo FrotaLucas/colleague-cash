@@ -3,7 +3,7 @@ using ColleagueCash.Domain.Entities;
 using ColleagueCash.Application.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace ColleagueCash.Infrastructure
+namespace ColleagueCash.Infrastructure.WorkLoad.Repository
 {
     public class LoanRepository : ILoanRepository
     {
@@ -40,7 +40,7 @@ namespace ColleagueCash.Infrastructure
                 .Select(line => new Loan
                 {
                     Description = line[1],
-                    Amount = Decimal.Parse(line[2]),
+                    Amount = decimal.Parse(line[2]),
                     LoanDate = DateTime.Parse(line[3])
                 })
                 .ToList();
@@ -63,7 +63,7 @@ namespace ColleagueCash.Infrastructure
                     .Select(line => new Loan
                     {
                         Description = line[1],
-                        Amount = Decimal.Parse(line[2]),
+                        Amount = decimal.Parse(line[2]),
                         LoanDate = DateTime.Parse(line[3])
                     })
                     .ToList();
@@ -94,7 +94,6 @@ namespace ColleagueCash.Infrastructure
 
             File.WriteAllLines(_appConfig.DataFilesCSV.LoanPath, updatedFile);
         }
-
 
         public List<Loan> GetAllLoansByBorrowerId(int id)
         {

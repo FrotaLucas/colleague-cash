@@ -3,7 +3,7 @@ using ColleagueCash.Domain.Entities;
 using ColleagueCash.Application.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace ColleagueCash.Infrastructure
+namespace ColleagueCash.Infrastructure.WorkLoad.Repository
 {
     public class BorrowerRepository : IBorrowerRepository
     {
@@ -74,7 +74,7 @@ namespace ColleagueCash.Infrastructure
                       BorrowerId = int.Parse(line[0]),
                       Name = line[1],
                       FamilyName = line[2],
-                      Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
+                      Cellphone = string.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
                   })
                   .ToList();
 
@@ -101,7 +101,7 @@ namespace ColleagueCash.Infrastructure
                     BorrowerId = int.Parse(line[0]),
                     Name = line[1],
                     FamilyName = line[2],
-                    Cellphone = String.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
+                    Cellphone = string.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
 
                 })
                 .FirstOrDefault();

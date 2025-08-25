@@ -32,8 +32,5 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Compile>
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Infrastructure\WorkLoad\Repository\" />
-	</ItemGroup>
 
 </Project>
