@@ -1,5 +1,1 @@
-﻿adicionar propriedade List<Loan> loans na classe Borrower
-
-
-2 criar metodo na classe LoanService que devolve borrowers com lista de Loan.
-ou seja mostrar Loans com nome que ele pertence
+﻿do more tests
