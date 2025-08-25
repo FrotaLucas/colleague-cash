@@ -18,15 +18,14 @@
 	</ItemGroup>
 
 	
-	<!--PQ PRECISO ADICIONAR ESSE BLOCO ?-->
+
 	<ItemGroup>
 		<None Update="Application\appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="Application\appsettings.Development.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
 	</ItemGroup>
+
+	<!--Dont need this block-->
 	<ItemGroup>
 	  <Compile Update="Application\Configuration\AppConfig.cs">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
