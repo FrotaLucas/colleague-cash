@@ -104,7 +104,7 @@ class Program
             Console.WriteLine("3 - List all debts ordered by amount\n"); //By amount
             Console.WriteLine("4 - List all debts ordered by date\n");
             Console.WriteLine("5 - Find all debts of your colleague\n");
-            Console.WriteLine("6 - List all your colleagues who owe you money\n");
+            Console.WriteLine("6 - List all registered colleagues\n");
             Console.WriteLine("0 - Exit\n");
             Console.Write("Your option: ");
 
