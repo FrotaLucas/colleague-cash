@@ -6,7 +6,7 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IService
     {
         public void GetAllBorrowersOrderedByName();
 
-        public void GetAllBorrowersWithLoans();
+        public List<Borrower> GetAllBorrowersWithLoans();
 
         public int AddNewBorrower(string name, string familyName, int? cellphone);
     }
