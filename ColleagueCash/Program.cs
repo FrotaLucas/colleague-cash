@@ -3,7 +3,7 @@ using ColleagueCash.Application.Configuration;
 using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
 using ColleagueCash.Domain.Contracts.Interfaces.IService;
 using ColleagueCash.Domain.Contracts.Services;
-using ColleagueCash.Infrastructure;
+using ColleagueCash.Infrastructure.WorkLoad.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -103,7 +103,7 @@ class Program
             Console.WriteLine("2 - Settling a colleague debt\n");
             Console.WriteLine("3 - List all debts ordered by amount\n"); //By amount
             Console.WriteLine("4 - List all debts ordered by date\n");
-            Console.WriteLine("5 - List all debts of a colleague\n");
+            Console.WriteLine("5 - Find all debts of your colleague\n");
             Console.WriteLine("6 - List all your colleagues who owe you money\n");
             Console.WriteLine("0 - Exit\n");
             Console.Write("Your option: ");
