@@ -38,31 +38,65 @@ namespace ColleagueCashTest
 
             //mocking existed borrower
             _borrowerRepositoryMock
-                .Setup( r => r.GetBorrowerByFullname("Joao", "Silva") )
-                .Returns( borrower );   
+                .Setup(r => r.GetBorrowerByFullname("Joao", "Silva"))
+                .Returns(borrower);
 
             //creating new loan id registration
-            _loanRepositoryMock.Setup( r => r.GetNextId())
-                .Returns( 10 );
+            _loanRepositoryMock.Setup(r => r.GetNextId())
+                .Returns(10);
 
             //creating new registration
             _loanService.RegisterNewLoan(100, "new test", "Joao", "Silva", 123456);
 
             //check if AddNewLoan was called once 
-            _loanRepositoryMock.Verify(r => 
-                r.AddNewLoan( It.Is<String>(s => 
-                    s.Contains("10") && 
+            _loanRepositoryMock.Verify(r =>
+                r.AddNewLoan(It.Is<String>(s =>
+                    s.Contains("10") &&
                     s.Contains("new test") &&
-                    s.Contains("100") && 
-                    s.Contains(borrower.BorrowerId.ToString()) 
+                    s.Contains("100") &&
+                    s.Contains(borrower.BorrowerId.ToString())
                     )),
                 Times.Once);
 
-
-
-
         }
 
+        [Fact]
+        public void RegisterNewLoan_WhenBorrowerDoesNotExists()
+        {
+            //mock return of null 
+            _borrowerRepositoryMock
+                .Setup(r => r.GetBorrowerByFullname("marie", "jane"))
+                .Returns((Borrower)null);
 
+            _loanRepositoryMock
+                .Setup(r => r.GetNextId())
+                .Returns(10);
+
+            _borrowerServiceMock
+                .Setup(r => r.AddNewBorrower("marie", "jane", 157239390))
+                .Returns(2);
+
+            _loanService.RegisterNewLoan(100, "second test", "marie", "jane", 157239390);
+
+            //1 check if addAddNewBorrower was called
+
+            _borrowerServiceMock.Verify(
+                r => r.AddNewBorrower(
+                    It.Is<string>(s => s.Contains("marie")),
+                    It.Is<string>(s => s.Contains("jane")),
+                    It.Is<int>(s => s == 157239390)
+                    ),
+                Times.Once);
+
+            //2 check if AddNewLoan was called
+            _loanRepositoryMock.Verify(
+                r => r.AddNewLoan( It.Is<string>( 
+                    s => s.Contains("10") &&
+                    s.Contains("second test") && 
+                    s.Contains("100") && 
+                    s.Contains("2") 
+                    )), 
+                Times.Once);
+        }
     }
 }
