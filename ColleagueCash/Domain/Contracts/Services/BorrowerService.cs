@@ -50,23 +50,17 @@ namespace ColleagueCash.Domain.Contracts.Services
             return;
         }
 
-        public void GetAllBorrowersWithLoans()
+        public List<Borrower> GetAllBorrowersWithLoans()
         {
-            var borrowers = _repositoryBorrower.GetAllBorrowers();
+            var borrowers = new List<Borrower>();   
+            borrowers = _repositoryBorrower.GetAllBorrowers();
 
             foreach (Borrower b in borrowers)
             {
-                Console.WriteLine($"Name: {b.Name} {b.FamilyName}\n");
                 b.Loans = _loanRepository.GetAllLoansByBorrowerId(b.BorrowerId);
-
-                b.Loans.Where(loan => loan.Amount > 0)
-                    .ToList()
-                    .ForEach(loan => Console.WriteLine(
-                    $"Outstanding amount: {loan.Amount} - " +
-                    $"Description: {loan.Description} - " +
-                    $"Date of registration: {loan.LoanDate}"
-                ));
             }
+
+            return borrowers;
         }
     }
 }
