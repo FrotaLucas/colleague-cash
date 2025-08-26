@@ -41,7 +41,7 @@ namespace ColleagueCashTest
                 .Returns(10);
 
             //creating new registration
-            _loanService.RegisterNewLoan(100, "new test", "Joao", "Silva", 123456);
+            _loanService.RegisterNewLoan(100, "new test", "Joao", "Silva", "123456");
 
             //check if AddNewLoan was called once 
             _loanRepositoryMock.Verify(r =>
@@ -68,17 +68,17 @@ namespace ColleagueCashTest
                 .Returns(10);
 
             _borrowerServiceMock
-                .Setup(r => r.AddNewBorrower("marie", "jane", 157239390))
+                .Setup(r => r.AddNewBorrower("marie", "jane", "157239390"))
                 .Returns(2);
 
-            _loanService.RegisterNewLoan(100, "second test", "marie", "jane", 157239390);
+            _loanService.RegisterNewLoan(100, "second test", "marie", "jane", "157239390");
 
             //1 check if addAddNewBorrower was called
             _borrowerServiceMock.Verify(
                 r => r.AddNewBorrower(
                     It.Is<string>(s => s.Contains("marie")),
                     It.Is<string>(s => s.Contains("jane")),
-                    It.Is<int>(s => s == 157239390)
+                    It.Is<string>(s => s.Contains("157239390"))
                     ),
                 Times.Once);
 
