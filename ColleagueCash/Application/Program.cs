@@ -101,8 +101,8 @@ class Program
             Console.WriteLine("\n=== Loan Tracker ===");
             Console.WriteLine("1 - Register new Loan\n");
             Console.WriteLine("2 - Settle a debt\n");
-            Console.WriteLine("3 - List all debts ordered by amount\n"); //By amount
-            Console.WriteLine("4 - List all debts ordered by date\n");
+            Console.WriteLine("3 - List all debts by amount\n"); //By amount
+            Console.WriteLine("4 - List all debts by date\n");
             Console.WriteLine("5 - Find all debts of your colleague\n");
             Console.WriteLine("6 - List all registered colleagues\n");
             Console.WriteLine("0 - Exit\n");
