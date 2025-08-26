@@ -101,9 +101,9 @@ namespace ColleagueCash.Domain.Contracts.Services
             foreach (var item in allLoans)
             {
                 Console.WriteLine(
-                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} " +
-                    $"Outstanding amount: {item.Loan.Amount} - " +
-                    $"Description: {item.Loan.Description} - " +
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} | " +
+                    $"Outstanding amount: {item.Loan.Amount} | " +
+                    $"Description: {item.Loan.Description} | " +
                     $"Date of registration: {item.Loan.LoanDate}"
                 );
             }
@@ -132,9 +132,9 @@ namespace ColleagueCash.Domain.Contracts.Services
             foreach (var item in allLoans)
             {
                 Console.WriteLine(
-                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} " +
-                    $"Outstanding amount: {item.Loan.Amount} - " +
-                    $"Description: {item.Loan.Description} - " +
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} | " +
+                    $"Outstanding amount: {item.Loan.Amount} | " +
+                    $"Description: {item.Loan.Description} | " +
                     $"Date of registration: {item.Loan.LoanDate}"
                 );
             }
@@ -156,8 +156,8 @@ namespace ColleagueCash.Domain.Contracts.Services
             foreach (var loan in loans)
             {
                 Console.WriteLine(
-                    $"Outstanding amount: {loan.Amount} - " +
-                    $"Description: {loan.Description} - " +
+                    $"Outstanding amount: {loan.Amount} | " +
+                    $"Description: {loan.Description} | " +
                     $"Date of registration: {loan.LoanDate}"
                 );
             }
