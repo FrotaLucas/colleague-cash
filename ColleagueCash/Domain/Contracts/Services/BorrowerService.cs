@@ -18,7 +18,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             _loanRepository = loanRepository;
         }
 
-        public int AddNewBorrower(string name, string familyName, int? cellphone)
+        public int AddNewBorrower(string name, string familyName, string? cellphone)
         {
             Borrower newBorrower = new Borrower
             {
