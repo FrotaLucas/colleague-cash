@@ -139,13 +139,13 @@ class Program
                         familyName = fullName1[1];
                     }
 
-                    int? cellphone = null;
+                    string? cellphone = null;
                     Console.WriteLine("Cellphone Number: Y/N: ");
                   
                     if(Console.ReadLine().ToLower() == "y")
                     {
                         Console.Write("Enter cellphone number: ");
-                        cellphone = int.Parse(Console.ReadLine());
+                        string celphone = Console.ReadLine();
                     }
 
                     Console.Write("Amount: ");
