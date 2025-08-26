@@ -8,6 +8,6 @@ namespace ColleagueCash.Domain.Contracts.Interfaces.IService
 
         public List<Borrower> GetAllBorrowersWithLoans();
 
-        public int AddNewBorrower(string name, string familyName, int? cellphone);
+        public int AddNewBorrower(string name, string familyName, string? cellphone);
     }
 }
