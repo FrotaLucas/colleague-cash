@@ -71,7 +71,7 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
                       BorrowerId = int.Parse(line[0]),
                       Name = line[1],
                       FamilyName = line[2],
-                      Cellphone = string.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
+                      Cellphone = string.IsNullOrEmpty(line[3]) ? "0" : line[3],
                   })
                   .ToList();
 
@@ -98,8 +98,7 @@ namespace ColleagueCash.Infrastructure.WorkLoad.Repository
                     BorrowerId = int.Parse(line[0]),
                     Name = line[1],
                     FamilyName = line[2],
-                    Cellphone = string.IsNullOrEmpty(line[3]) ? 0 : int.Parse(line[3]),
-
+                    Cellphone = string.IsNullOrEmpty(line[3]) ? "0" : line[3],
                 })
                 .FirstOrDefault();
 
