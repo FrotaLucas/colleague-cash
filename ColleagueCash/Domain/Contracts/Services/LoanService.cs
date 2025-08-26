@@ -21,7 +21,7 @@ namespace ColleagueCash.Domain.Contracts.Services
             _borrowerService = borrowerService;
         }
 
-        public void RegisterNewLoan(decimal amount, string description, string name, string familyName, int? cellphone)
+        public void RegisterNewLoan(decimal amount, string description, string name, string familyName, string? cellphone)
         {
             Borrower storedBorrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
 
