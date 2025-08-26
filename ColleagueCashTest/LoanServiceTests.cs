@@ -63,10 +63,12 @@ namespace ColleagueCashTest
                 .Setup(r => r.GetBorrowerByFullname("marie", "jane"))
                 .Returns((Borrower)null);
 
+            // create id registration 10
             _loanRepositoryMock
                 .Setup(r => r.GetNextId())
                 .Returns(10);
 
+            //create id user 2
             _borrowerServiceMock
                 .Setup(r => r.AddNewBorrower("marie", "jane", "157239390"))
                 .Returns(2);
