@@ -3,7 +3,7 @@ using ColleagueCash.Domain.Entities;
 using ColleagueCash.Application.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace ColleagueCash.Infrastructure.WorkLoad.Repository
+namespace ColleagueCash.Infrastructure.Repository
 {
     public class BorrowerRepository : IBorrowerRepository
     {
