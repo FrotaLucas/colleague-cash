@@ -145,7 +145,7 @@ class Program
                     if(Console.ReadLine().ToLower() == "y")
                     {
                         Console.Write("Enter cellphone number: ");
-                        string celphone = Console.ReadLine();
+                        cellphone = Console.ReadLine();
                     }
 
                     Console.Write("Amount: ");
