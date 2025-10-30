@@ -1,0 +1,167 @@
+﻿using ColleagueCash.Domain.Contracts.Interfaces.IRepository;
+using ColleagueCash.Domain.Contracts.Interfaces.IService;
+using ColleagueCash.Domain.Entities;
+
+namespace ColleagueCash.Domain.Contracts.Services
+{
+    public class LoanService : ILoanService
+    {
+        private ILoanRepository _loanRepository;
+        private IBorrowerRepository _borrowerRepository;
+        private IBorrowerService _borrowerService;
+
+
+        public LoanService(
+            ILoanRepository repositoryLoan,
+            IBorrowerRepository repositoryBorrower,
+            IBorrowerService borrowerService)
+        {
+            _loanRepository = repositoryLoan;
+            _borrowerRepository = repositoryBorrower;
+            _borrowerService = borrowerService;
+        }
+
+        public void RegisterNewLoan(decimal amount, string description, string name, string familyName, string? cellphone)
+        {
+            Borrower storedBorrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
+
+            int idRegistration = _loanRepository.GetNextId();
+
+            if (storedBorrower is null)
+            {
+                storedBorrower = new Borrower();
+                int borrowerId = _borrowerService.AddNewBorrower(name, familyName, cellphone);
+                storedBorrower.BorrowerId = borrowerId;
+            }
+
+            string newRegistration = $"{idRegistration};{description};{amount};{DateTime.Now:yyyy-MM-dd};{storedBorrower.BorrowerId}";
+            _loanRepository.AddNewLoan(newRegistration);
+        }
+
+        public bool ReduceLoan(string name, string familyName, decimal amount)
+        {
+            var borrower = _borrowerRepository.GetBorrowerByFullname(name, familyName);
+
+            if (borrower != null && borrower.BorrowerId != null)
+            {
+                var listOfLoan = _loanRepository.GetAllLoansByBorrowerId(borrower.BorrowerId)
+                    .OrderBy(loan => loan.LoanDate)
+                    .ToList();
+
+                int i = 0;
+                while (amount > 0 && i < listOfLoan.Count)
+                {
+                    if (amount >= listOfLoan[i].Amount)
+                    {
+                        amount -= listOfLoan[i].Amount;
+                        listOfLoan[i].Amount = 0;
+                    }
+
+                    else
+                    {
+                        listOfLoan[i].Amount -= amount;
+                        amount = 0;
+                    }
+                    i++;
+                }
+
+                if (amount > 0)
+                    Console.WriteLine($"Warining: Payment amount exceeds the total loan. Amount exceeds by {amount} Euros.");
+
+                _loanRepository.ReduceLoan(listOfLoan);
+                return true;
+            }
+
+            else
+            {
+                Console.WriteLine("Colleage not registered yet.");
+                return false;
+            }
+        }
+
+        public void DisplayAllLoansByAmount()
+        {
+
+            List<Borrower> borrowers = _borrowerService.GetAllBorrowersWithLoans();
+
+            if(borrowers.Count == 0)
+            {
+                Console.WriteLine("List of colleagues not created!");
+                return;
+
+            }
+
+            var allLoans = borrowers
+                .SelectMany(b => b.Loans
+                    .Where(b => b.Amount > 0)
+                    .Select(l => new { Borrower = b, Loan = l }))
+                .OrderByDescending(newObj => newObj.Loan.Amount);
+
+
+            foreach (var item in allLoans)
+            {
+                Console.WriteLine(
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} | " +
+                    $"Outstanding amount: {item.Loan.Amount} | " +
+                    $"Description: {item.Loan.Description} | " +
+                    $"Date of registration: {item.Loan.LoanDate}"
+                );
+            }
+
+        }
+        
+        public void DisplayAllLoansByDate()
+        {
+   
+            var borrowers = _borrowerService.GetAllBorrowersWithLoans();
+
+            if (borrowers.Count == 0)
+            {
+                Console.WriteLine("List of colleagues not created!");
+                return;
+
+            }
+
+            var allLoans = borrowers
+                .SelectMany(b => b.Loans
+                    .Where(l => l.Amount >0)
+                    .Select(l => new {Borrower = b, Loan = l}) )
+                .OrderBy(newObjt => newObjt.Loan.LoanDate);
+
+
+            foreach (var item in allLoans)
+            {
+                Console.WriteLine(
+                    $"Name: {item.Borrower.Name} {item.Borrower.FamilyName} | " +
+                    $"Outstanding amount: {item.Loan.Amount} | " +
+                    $"Description: {item.Loan.Description} | " +
+                    $"Date of registration: {item.Loan.LoanDate}"
+                );
+            }
+
+        }
+
+        public void DisplayAllLoansOfColleague(string name, string familyName)
+        {
+            var loans = _loanRepository.GetAllLoansByBorrower(name, familyName)
+                .Where(loan => loan.Amount > 0)
+                .OrderBy(loan => loan.LoanDate);
+
+            if (!loans.Any())
+            {
+                Console.WriteLine("Colleague doesn't have any debt.");
+                return;
+            }
+
+            foreach (var loan in loans)
+            {
+                Console.WriteLine(
+                    $"Outstanding amount: {loan.Amount} | " +
+                    $"Description: {loan.Description} | " +
+                    $"Date of registration: {loan.LoanDate}"
+                );
+            }
+        }
+
+    }
+}

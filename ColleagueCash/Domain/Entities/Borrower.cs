@@ -1,4 +1,4 @@
-﻿namespace ColleagueCash.Domain
+﻿namespace ColleagueCash.Domain.Entities
 {
     public class Borrower
     {
@@ -8,7 +8,9 @@
 
         public string FamilyName { get; set; }
 
-        public int? Cellphone { get; set; }
+        public string? Cellphone { get; set; }
+
+        public List<Loan> Loans { get; set; } = new List<Loan>();
     }
 
 }

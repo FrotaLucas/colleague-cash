@@ -1,10 +1,1 @@
-﻿1 modelagem/arquitetura
-
-nao seria melhor colocar IRepositoryLoan e RepositoryLoan dentro de uma mesma pasta RepositoryLoan dentro
-de infrastructure?
-
-infrastructure  >
-					RepositoryLoan >
-					                 IRepositoryLoan.cs
-									 RepositoryLoan.cs
-
+﻿do more tests
